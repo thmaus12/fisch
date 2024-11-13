@@ -3456,7 +3456,7 @@ Main = Tap.General:AddSection('General') do
 	Toggle(Main, "Auto Farm Fish","", "Farm Fish")
 	Toggle(Main, "Teleport To Select Position","", "To Pos Stand")
 	Main:AddButton({
-		Title = "Select Position",
+		Title = "Выберите позицию",
 		Callback = function()
 			Config['SelectPositionStand'] = LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame
 			SelectPosition:SetTitle("Position : "..tostring(math.floor(LocalPlayer.Character:FindFirstChild("HumanoidRootPart").Position.X)).." X "..tostring(math.floor(LocalPlayer.Character:FindFirstChild("HumanoidRootPart").Position.Y)).." Y "..tostring(math.floor(LocalPlayer.Character:FindFirstChild("HumanoidRootPart").Position.Z)).." Z")
@@ -3573,7 +3573,7 @@ AllFuncs['Auto Find Boat Event'] = function()
 					["embeds"] = {
 						{
 							["id"]= 661605297,
-							["title"]= "Fisch Notify",
+							["title"]= "рыба Уведомить",
 							["description"] = "** Player : "..LocalPlayer.Name.."\n Trade Witches Ingredient Success **",
 							["color"]= 8646911,
 							["fields"]= {},
@@ -3608,7 +3608,7 @@ Event = Tap.Event:AddSection('Event') do
 	Toggle(Event, "Back To Auto Fishing","", "Back To Fishing")
 	Toggle(Event, "Hop Server","Hop Server For Not Found Ingredient", "Hop Not Found Ingredient")
 	Event:AddButton({
-		Title = "Teleport To Ingredient",
+		Title = "Телепортироваться к ингредиенту",
 		Callback = function()
 			if Config['Ingredient Select'] == "" then
 				Notify("Pls Select Ingredient ")
@@ -3629,7 +3629,7 @@ Event = Tap.Event:AddSection('Event') do
 	})
 	
 	Event:AddButton({
-		Title = "Refresh Ingredient",
+		Title = "Обновить ингредиент",
 		Callback = function()
 			IngredientDropdwon:SetValues(IngredientList)
 		end
@@ -3640,19 +3640,19 @@ Seller = Tap.General:AddSection('Seller') do
 	Toggle(Seller, "Auto Sell Fish","", "Sell Fish")
 
 	Seller:AddButton({
-		Title = "Sell All Fish",
+		Title = "продать все рыбы",
 		Callback = function()
 			ReplicatedStorage:WaitForChild("events"):WaitForChild("selleverything"):InvokeServer()
 		end
 	})
 	Seller:AddButton({
-		Title = "Sell Fish ( In Hand )",
+		Title = "продать все рыбы ( In Hand )",
 		Callback = function()
 			workspace.world.npcs:FindFirstChild("Marc Merchant").merchant.sell:InvokeServer()
 		end
 	})
 	Seller:AddButton({
-		Title = "Show Ui Buy Boat",
+		Title = "купить корабль (ui)",
 		Callback = function()
 			PlayerGui.hud.safezone.shipwright.Visible = not PlayerGui.hud.safezone.shipwright.Visible 
 		end
@@ -3696,7 +3696,7 @@ InfoFish = Tap.General:AddSection('Info Fish') do
 		end
 	})
 	InfoFish:AddButton({
-		Title = "Get Info Fish",
+		Title = "получить инфу про рыбу",
 		Callback = function()
 			if Config['Select Fish Info'] == "" then
 				Notify("Pls Select Fish")
@@ -3782,7 +3782,7 @@ MiscPlayer = Tap.Player:AddSection('Misc Player') do
 			end
 		end
 	end)
-	Toggle(MiscPlayer, "Remove Fog", "", "Remove Fog", function(Value)
+	Toggle(MiscPlayer, "видеть ночью", "", "Remove Fog", function(Value)
 		if Value then
 			if game:GetService("Lighting"):FindFirstChild("Sky") then
 				game:GetService("Lighting"):FindFirstChild("Sky").Parent = game:GetService("Lighting").bloom
@@ -3807,21 +3807,21 @@ MiscPlayer = Tap.Player:AddSection('Misc Player') do
 	end)
 	
 	MiscPlayer:AddButton({
-		Title = "Rejoin Server",
+		Title = "перезайти на сервер",
 		Description = "",
 		Callback = function()
 			TeleportService:TeleportToPlaceInstance(game.placeId, game.jobId, game.Players.LocalPlayer);
 		end,
 	})
 	MiscPlayer:AddButton({
-		Title = "Hop Server",
+		Title = "перезапуск на другой сервер",
 		Description = "",
 		Callback = function()
 			AllFuncs.HopServer(true)
 		end
 	})
 	MiscPlayer:AddButton({
-		Title = "Hop Server Low",
+		Title = "тп на пустой сервер",
 		Description = "",
 		Callback = function()
 			AllFuncs.HopServer(false)
@@ -3830,7 +3830,7 @@ MiscPlayer = Tap.Player:AddSection('Misc Player') do
 end
 
 Shoppy = Tap.Shop:AddSection('Shop All') do
-	Toggle(Shoppy, "Teleport To Buy", "", "Teleport To Buy")
+	Toggle(Shoppy, "Телепорт к покупке", "", "Teleport To Buy")
 	for i,v in pairs(workspace.world.interactables:GetDescendants()) do
 		if v.Name == "purchaserompt" or v.ClassName == "ProximityPrompt" then
 			v.HoldDuration = 0
@@ -3857,7 +3857,7 @@ Shoppy = Tap.Shop:AddSection('Shop All') do
 	end
 end
 Shoppy:AddButton({
-    Title = "Buy Enchant Relic",
+    Title = "Купить инчант удочку",
     Description = "View [11,000C$]",
     Callback = function()
         local player = game.Players.LocalPlayer
@@ -3898,7 +3898,7 @@ WebHookConfigs = Tap.Configs:AddSection('WebHook') do
 				["embeds"] = {
 					{
 						["id"]= 661605297,
-						["title"]= "Fisch Notify",
+						["title"]= "Рыба уведомление",
 						["description"] = "** Player : "..LocalPlayer.Name.."\n THIS TESTING WEBHOOK**",
 						["color"]= 8646911,
 						["fields"]= {},
