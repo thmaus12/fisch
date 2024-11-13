@@ -3389,7 +3389,7 @@ AllFuncs['Sending Webhook'] = function()
 				["embeds"] = {
 					{
 						["id"]= 661605297,
-						["title"]= "Fisch Notify",
+						["title"]= "уведомления рыб",
 						["description"] = "** Player : "..LocalPlayer.Name.."\n "..MoneyDes..""..LevelDes..""..AllFishInventory.."**",
 						["color"]= 8646911,
 						["fields"]= {},
@@ -3426,7 +3426,7 @@ workspace.active.ChildAdded:Connect(function(child)
 				["embeds"] = {
 					{
 						["id"]= 661605297,
-						["title"]= "Fisch Notify",
+						["title"]= "уведомление о рыб",
 						["description"] = "** Player : "..LocalPlayer.Name.."\n Found Safe Whirlpool\n Position : "..StringInput.."**",
 						["color"]= 8646911,
 						["fields"]= {},
@@ -3666,21 +3666,21 @@ end
 
 InfoFish = Tap.General:AddSection('Info Fish') do
 	InfoPrice = InfoFish:AddParagraph({        
-		Title = "Pice : N/A"
+		Title = "Рис: N/A"
 	})
 	InfoRarity = InfoFish:AddParagraph({        
-		Title = "Rarity : N/A"
+		Title = "Редкость: N/A"
 	})
 	InfoChance = InfoFish:AddParagraph({        
-		Title = "Chance : N/A"
+		Title = "Шанс: N/A"
 	})
 	InfoFavouriteBait = InfoFish:AddParagraph({        
-		Title = "FavouriteBait : N/A"
+		Title = "ЛюбимаяПриманка : N/A"
 	})
 	
 	Dropdown(InfoFish, "Select Fish", "", FishList, false, "Select Fish Info")
 	InfoFish:AddButton({
-		Title = "Get Info Fish In Hand",
+		Title = "Получить информацию Рыба в руке",
 		Callback = function()
 			for i,v in pairs(LocalPlayer.Character:GetChildren()) do
 				if table.find(FishList, v.Name) then
@@ -3835,7 +3835,7 @@ Shoppy = Tap.Shop:AddSection('Shop All') do
 		if v.Name == "purchaserompt" or v.ClassName == "ProximityPrompt" then
 			v.HoldDuration = 0
 			Shoppy:AddButton({
-				Title = "Buy "..v.Parent.Name,
+				Title = "купить "..v.Parent.Name,
 				Description = v.ActionText,
 				Callback = function()
 					if fireproximityprompt and not Config['Teleport To Buy'] then
@@ -3890,7 +3890,7 @@ WebHookConfigs = Tap.Configs:AddSection('WebHook') do
 	Toggle(WebHookConfigs, "Ping Discord Id","","Ping Discord Id")
 	
 	WebHookConfigs:AddButton({
-		Title = "Test WebHook",
+		Title = "Тестирование веб-перехватчика",
 		Description = "",
 		Callback = function()
 			local SendingSuccess = sendwebhook(Config['WebHook Configs'], {
@@ -3975,13 +3975,13 @@ end
 Teleporting = Tap.Teleport:AddSection('Teleport') do
 	-- Teleporting button for "Sunstone Island"
 Teleporting:AddButton({
-    Title = "Sunstone Island",
+    Title = "Остров Санстоун",
     Callback = function()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-913.630615234375, 137.29348754882812, -1129.8995361328125)
     end
 })
 
--- Teleporting button for "Roslit Bay"
+-- Teleporting button for "Рослит Бэй"
 Teleporting:AddButton({
     Title = "Roslit Bay",
     Callback = function()
@@ -3989,57 +3989,57 @@ Teleporting:AddButton({
     end
 })
 
--- Teleporting button for "Random Islands"
+-- Teleporting button for "Случайные острова"
 Teleporting:AddButton({
-    Title = "Random Islands",
+    Title = "Случайные острова",
     Callback = function()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(237.6944580078125, 139.34976196289062, 43.103424072265625)
     end
 })
 
--- Teleporting button for "Moosewood"
+-- Teleporting button for "Мусвуд"
 Teleporting:AddButton({
-    Title = "Moosewood",
+    Title = "Мусвуд",
     Callback = function()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(433.7972106933594, 147.07003784179688, 261.80218505859375)
     end
 })
 
--- Teleporting button for "Executive Headquarters"
+-- Teleporting button for "Исполнительный штаб"
 Teleporting:AddButton({
-    Title = "Executive Headquarters",
+    Title = "Исполнительный штаб",
     Callback = function()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-36.46199035644531, -246.55001831054688, 205.77120971679688)
     end
 })
 
--- Teleporting button for "Enchant Room"
+-- Teleporting button for "Зачарование комната"
 Teleporting:AddButton({
-    Title = "Enchant Room",
+    Title = "Зачарование комната",
     Callback = function()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1310.048095703125, -805.292236328125, -162.34507751464844)
     end
 })
 
--- Teleporting button for "Statue Of Sovereignty"
+-- Teleporting button for "Статуя Суверенитета"
 Teleporting:AddButton({
-    Title = "Statue Of Sovereignty",
+    Title = "Статуя Суверенитета",
     Callback = function()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(22.098665237426758, 159.01470947265625, -1039.8543701171875)
     end
 })
 
--- Teleporting button for "Mushgrove Swamp"
+-- Teleporting button for "Мушгроувское болото"
 Teleporting:AddButton({
-    Title = "Mushgrove Swamp",
+    Title = "Мушгроувское болото",
     Callback = function()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2442.805908203125, 130.904052734375, -686.1648559570312)
     end
 })
 
--- Teleporting button for "Snowcap Island"
+-- Teleporting button for "Снежный остров"
 Teleporting:AddButton({
-    Title = "Snowcap Island",
+    Title = "Снежный остров",
     Callback = function()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2589.534912109375, 134.9249267578125, 2333.099365234375)
     end
