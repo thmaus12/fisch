@@ -8,7 +8,7 @@ local Window = Fluent:CreateWindow({
 	TabWidth = 160,
 	Size = UDim2.fromOffset(550, 350),
 	Acrylic = false, 
-	Theme = "Darker",
+	Theme = "Dark",
 	MinimizeKey = Enum.KeyCode.LeftControl
 })
 
@@ -3049,13 +3049,13 @@ do -- INFO FISH
 end
 
 local Tap = {
-	General = Window:AddTab({Title = "Generals", Icon = "box"}),
-	Event = Window:AddTab({Title = "Event", Icon = "star"}),
-	Player = Window:AddTab({ Title = "Player", Icon = "user"}),
-	Shop = Window:AddTab({ Title = "Shopee", Icon = "shopping-bag"}),
-	Configs = Window:AddTab({Title = "Configs", Icon = "diamond"}),
-	Teleport = Window:AddTab({Title = "Teleport", Icon = "asterisk"}),
-	Settings = Window:AddTab({Title = "Settings", Icon = "settings"})
+	General = Window:AddTab({Title = "Главное", Icon = "box"}),
+	Event = Window:AddTab({Title = "Эвент", Icon = "star"}),
+	Player = Window:AddTab({ Title = "Игроки", Icon = "user"}),
+	Shop = Window:AddTab({ Title = "Магазин", Icon = "shopping-bag"}),
+	Configs = Window:AddTab({Title = "Конфиг", Icon = "diamond"}),
+	Teleport = Window:AddTab({Title = "Телепорт", Icon = "asterisk"}),
+	Settings = Window:AddTab({Title = "Настройки", Icon = "settings"})
 }
 
 Toggle = function(Section, NameIndex, Description, ConfigName, Function, ...)
