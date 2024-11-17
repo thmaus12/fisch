@@ -2,198 +2,187 @@ local Fluent = loadstring(game:HttpGet("https://raw.githubusercontent.com/Knuxy9
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
--- Создание окна интерфейса
 local Window = Fluent:CreateWindow({
-    Title = "SCRIPTMAUSRB", -- Заголовок окна
-    SubTitle = "ЛУЧШИЙ ПРИВАТНЫЙ СКРИПТ", -- Подзаголовок
-    TabWidth = 120,  -- Ширина вкладки
-    Size = UDim2.fromOffset(550, 350), -- Размер окна
-    Acrylic = false,  -- Отключение акрилового эффекта
-    Theme = "Amethyst",  -- Тема интерфейса
-    MinimizeKey = Enum.KeyCode.LeftControl  -- Горячая клавиша для минимизации
+	Title = "14k_LAK IS DEFINITELY SHIT",
+	SubTitle = "Private Script",
+	TabWidth = 160,
+	Size = UDim2.fromOffset(550, 350),
+	Acrylic = false, 
+	Theme = "Amethyst",
+	MinimizeKey = Enum.KeyCode.LeftControl
 })
 
 do 
-    Config = {}  -- Конфигурации
-    _G.Config = Config  -- Глобальная конфигурация
-    AllFuncs = {}  -- Все функции
-    Threads = getgenv().Threads  -- Потоки
-    Players = game.Players  -- Ссылка на сервис игроков
-    LocalPlayer = game.Players.LocalPlayer  -- Локальный игрок
-    Client = game.Players.LocalPlayer  -- Клиент (тот же игрок)
+	Config = {
 
-    -- \\ Модули и сервисы // --
+	}
+	_G.Config = Config
+	AllFuncs = {}
+	Threads = getgenv().Threads
+	Players = game.Players
+	LocalPlayer = game.Players.LocalPlayer
+	Client = game.Players.LocalPlayer
 
-    ReplicatedStorage = game:GetService('ReplicatedStorage')  -- Сервис ReplicatedStorage
-    RunService = game:GetService("RunService")  -- Сервис RunService
-    VirtualInputManager = game:GetService('VirtualInputManager')  -- Сервис VirtualInputManager
-    CollectionService = game:GetService("CollectionService")  -- Сервис CollectionService
-    CoreGui = game:GetService("CoreGui")  -- Сервис CoreGui
-    HttpService = game:GetService("HttpService")  -- Сервис HttpService
-    TeleportService = game:GetService("TeleportService")  -- Сервис TeleportService
-    VirtualUser = game:GetService("VirtualUser")  -- Сервис VirtualUser
-    UserInputService = game:GetService("UserInputService")  -- Сервис UserInputService
 
-    -- \\ Нормальные модули // --
-    
-    PlayerGui = LocalPlayer.PlayerGui  -- Игровой интерфейс игрока
-    Backpack = LocalPlayer.Backpack  -- Рюкзак игрока
-    request = (syn and syn.request) or (http and http.request) or http_request or (fluxus and fluxus.request) or request  -- Запросы (для разных платформ)
+	-- \\ Module GetService // --
 
-    Char = Client.Character  -- Персонаж игрока
-    Character = Client.Character  -- Тот же персонаж
-    if not Threads then getgenv().Threads = {} end  -- Если нет потоков, создаём их
+	ReplicatedStorage = game:GetService('ReplicatedStorage')
+	RunService = game:GetService("RunService")
+	VirtualInputManager = game:GetService('VirtualInputManager')
+	CollectionService = game:GetService("CollectionService")
+	CoreGui = game:GetService("CoreGui")
+	HttpService = game:GetService("HttpService")
+	TeleportService = game:GetService("TeleportService")
+	VirtualUser = game:GetService("VirtualUser")
+	VirtualInputManager = game:GetService("VirtualInputManager")
+	UserInputService = game:GetService("UserInputService")
 
-    -- Ждём, пока локальный игрок будет доступен
-    repeat 
-        LocalPlayer = Players.LocalPlayer
-        wait()
-    until LocalPlayer
+
+	-- \\ Normal Module // --
+	
+	PlayerGui = LocalPlayer.PlayerGui
+	Backpack = LocalPlayer.Backpack
+	request = (syn and syn.request) or (http and http.request) or http_request or (fluxus and fluxus.request) or request
+
+	Char = Client.Character
+	Character = Client.Character
+	if not Threads then getgenv().Threads = {} end
+
+	repeat 
+		LocalPlayer = Players.LocalPlayer
+		wait()
+	until LocalPlayer
 end
 
--- Функция уведомления
-function Notify(Описание, Время, Заголовок)
-    Fluent:Notify({
-        Title = Заголовок or "Уведомление Normal Hub",  -- Заголовок уведомления
-        Content = Описание,  -- Описание уведомления
-        Duration = Время or 3  -- Длительность уведомления (по умолчанию 3 секунды)
-    })
+function Notify(Des, Time, title)
+	Fluent:Notify({
+		Title= title or "Normal Hub Notify",
+		Content = Des,
+		Duration = Time or 3
+	})
 end
 
--- Настройки для "Normal Hub Table" (Таблица настроек)
 _G['Normal Hub Table'] = {
-    isWindows = UserInputService:GetPlatform() == Enum.Platform.Windows,  -- Проверка, Windows ли у пользователя
-    TypeOs = (table.find({Enum.Platform.Windows}, game:GetService('UserInputService'):GetPlatform()) ~= nil and 'Pc') or 'Mb',  -- Тип устройства (ПК или мобильное)
-    SizeUi = (not isWindows and UDim2.fromOffset(600, 300)) or UDim2.fromOffset(560, 600),  -- Размер интерфейса в зависимости от устройства
-    AutoSize = true,  -- Автоматический размер
-    TweenUiSize = true,  -- Анимация изменения размера UI
-    SpeedTweenUi = 0.25,  -- Скорость анимации изменения размера
-    StyleTweenUi = Enum.EasingStyle.Quad,  -- Стиль анимации изменения размера
-    Mutiply = 1.80,  -- Коэффициент масштабирования
-    SizeX = 550,  -- Размер по оси X
-    SafePercent = 20,  -- Безопасный процент (например, для изменения размера)
-    AnimationUiToggle = true,  -- Включение анимации интерфейса
+	isWindows = UserInputService:GetPlatform() == Enum.Platform.Windows,
+	TypeOs = (table.find({Enum.Platform.Windows}, game:GetService('UserInputService'):GetPlatform()) ~= nil and 'Pc') or 'Mb',
+	SizeUi = (not isWindows and UDim2.fromOffset(600,300)) or UDim2.fromOffset(560,600),
+	AutoSize = true,
+	TweenUiSize = true,
+	SpeedTweenUi = 0.25,
+	StyleTweenUi = Enum.EasingStyle.Quad,
+	Mutiply = 1.80,
+	SizeX = 550,
+	SafePercent = 20,
+
+	AnimationUiToggle = true,
 }
 
-_G['Normal Hub Table'].SizeUi = (not _G['Normal Hub Table'].isWindows and UDim2.fromOffset(600, 300)) or UDim2.fromOffset(560, 600)
+_G['Normal Hub Table'].SizeUi = (not _G['Normal Hub Table'].isWindows and UDim2.fromOffset(600,300)) or UDim2.fromOffset(560,600)
 if not _G['Normal Hub Table'].isWindows then
-    -- Удаление старой кнопки UI, если она существует
-    if game.CoreGui:FindFirstChild('UIBUTTON') then
-        game.CoreGui:FindFirstChild('UIBUTTON'):Destroy()
+	if game.CoreGui:FindFirstChild('UIBUTTON') then
+		game.CoreGui:FindFirstChild('UIBUTTON'):Destroy()
+	end
+
+	local TweenService = game:GetService("TweenService")
+	local UserInputService = game:GetService("UserInputService")
+	local UIBUTTON = Instance.new("ScreenGui")
+	local Frame = Instance.new("Frame")
+	local ImageButton = Instance.new("ImageButton")
+	local UICorner = Instance.new("UICorner")
+	local UICorner_2 = Instance.new("UICorner")
+
+	UIBUTTON.Name = "UIBUTTON"
+	UIBUTTON.Parent = game.CoreGui
+	UIBUTTON.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+	Frame.Parent = UIBUTTON
+	Frame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+	Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Frame.BorderSizePixel = 0
+	Frame.Transparency = 1
+	Frame.Position = UDim2.new(0.157012194, 0, 0.164366379, 0)
+	Frame.Size = UDim2.new(0, 115, 0, 49)
+
+ImageButton.Parent = Frame
+ImageButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ImageButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ImageButton.BorderSizePixel = 0
+ImageButton.Active = true
+ImageButton.Draggable = true
+ImageButton.Position = UDim2.new(0.218742043, 0, -0.155235752, 0)
+ImageButton.Size = UDim2.new(0, 64, 0, 64)
+
+-- Set initial image to "open"
+ImageButton.Image = "rbxassetid://136634905225382" -- Open image asset ID
+local isOpen = true -- Variable to track the state
+
+ImageButton.MouseButton1Click:Connect(function()
+    -- Animate the button size
+    ImageButton:TweenSize(UDim2.new(0, 60, 0, 60), Enum.EasingDirection.In, Enum.EasingStyle.Elastic, 0.1)
+    delay(0.1, function()
+        ImageButton:TweenSize(UDim2.new(0, 64, 0, 64), Enum.EasingDirection.Out, Enum.EasingStyle.Elastic, 0.1)
+    end)
+
+    -- Toggle the image based on the state
+    if isOpen then
+        ImageButton.Image = "rbxassetid://134717468347051" -- Replace with close image asset ID
+    else
+        ImageButton.Image = "rbxassetid://136634905225382" -- Open image asset ID
     end
+    isOpen = not isOpen -- Toggle the state
 
-    -- Получаем нужные сервисы
-    local TweenService = game:GetService("TweenService")
-    local UserInputService = game:GetService("UserInputService")
-    
-    -- Создаём интерфейсные элементы
-    local UIBUTTON = Instance.new("ScreenGui")
-    local Frame = Instance.new("Frame")
-    local ImageButton = Instance.new("ImageButton")
-    local UICorner = Instance.new("UICorner")
-    local UICorner_2 = Instance.new("UICorner")
+    -- Simulate key presses
+    local VirtualInputManager = game:GetService("VirtualInputManager")
+    VirtualInputManager:SendKeyEvent(true,"RightControl",false,game)
+    VirtualInputManager:SendKeyEvent(false,"RightControl",false,game)
+    VirtualInputManager:SendKeyEvent(true,"LeftControl",false,game)
+    VirtualInputManager:SendKeyEvent(false,"LeftControl",false,game)
+end)
 
-    -- Настройки для кнопки UIBUTTON
-    UIBUTTON.Name = "UIBUTTON"
-    UIBUTTON.Parent = game.CoreGui
-    UIBUTTON.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+UICorner.CornerRadius = UDim.new(0, 100)
+UICorner.Parent = ImageButton
 
-    -- Настройки для фрейма
-    Frame.Parent = UIBUTTON
-    Frame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
-    Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-    Frame.BorderSizePixel = 0
-    Frame.Transparency = 1
-    Frame.Position = UDim2.new(0.157012194, 0, 0.164366379, 0)
-    Frame.Size = UDim2.new(0, 115, 0, 49)
+	UICorner_2.CornerRadius = UDim.new(0, 10)
+	UICorner_2.Parent = Frame
 
-    -- Настройки для кнопки изображения
-    ImageButton.Parent = Frame
-    ImageButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    ImageButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
-    ImageButton.BorderSizePixel = 0
-    ImageButton.Active = true
-    ImageButton.Draggable = true
-    ImageButton.Position = UDim2.new(0.218742043, 0, -0.155235752, 0)
-    ImageButton.Size = UDim2.new(0, 64, 0, 64)
 
-    -- Устанавливаем начальное изображение (кнопка "открыть")
-    ImageButton.Image = "rbxassetid://136634905225382"  -- ID изображения "открыть"
-    local isOpen = true  -- Переменная для отслеживания состояния (открыто/закрыто)
+	local UIS = game:GetService('UserInputService')
+	local frame = Frame
+	local dragToggle = nil
+	local dragSpeed = 0.25
+	local dragStart = nil
+	local startPos = nil
 
-    -- Событие для клика по кнопке
-    ImageButton.MouseButton1Click:Connect(function()
-        -- Анимация изменения размера кнопки
-        ImageButton:TweenSize(UDim2.new(0, 60, 0, 60), Enum.EasingDirection.In, Enum.EasingStyle.Elastic, 0.1)
-        delay(0.1, function()
-            ImageButton:TweenSize(UDim2.new(0, 64, 0, 64), Enum.EasingDirection.Out, Enum.EasingStyle.Elastic, 0.1)
-        end)
+	local function updateInput(input)
+		local delta = input.Position - dragStart
+		local position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X,
+			startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+		game:GetService('TweenService'):Create(frame, TweenInfo.new(dragSpeed), {Position = position}):Play()
+	end
 
-        -- Переключение изображения в зависимости от состояния
-        if isOpen then
-            ImageButton.Image = "rbxassetid://134717468347051"  -- ID изображения "закрыть"
-        else
-            ImageButton.Image = "rbxassetid://136634905225382"  -- ID изображения "открыть"
-        end
-        isOpen = not isOpen  -- Переключаем состояние
+	frame.InputBegan:Connect(function(input)
+		if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then 
+			dragToggle = true
+			dragStart = input.Position
+			startPos = frame.Position
+			input.Changed:Connect(function()
+				if input.UserInputState == Enum.UserInputState.End then
+					dragToggle = false
+				end
+			end)
+		end
+	end)
 
-        -- Симуляция нажатия клавиш
-        local VirtualInputManager = game:GetService("VirtualInputManager")
-        VirtualInputManager:SendKeyEvent(true, "RightControl", false, game)
-        VirtualInputManager:SendKeyEvent(false, "RightControl", false, game)
-        VirtualInputManager:SendKeyEvent(true, "LeftControl", false, game)
-        VirtualInputManager:SendKeyEvent(false, "LeftControl", false, game)
-    end)
-
-    -- Добавляем закругления углов для кнопки
-    UICorner.CornerRadius = UDim.new(0, 100)
-    UICorner.Parent = ImageButton
-
-    -- Добавляем закругления углов для фрейма
-    UICorner_2.CornerRadius = UDim.new(0, 10)
-    UICorner_2.Parent = Frame
-
-    -- Создаём переменные для перетаскивания окна
-    local UIS = game:GetService('UserInputService')
-    local frame = Frame
-    local dragToggle = nil
-    local dragSpeed = 0.25
-    local dragStart = nil
-    local startPos = nil
-
-    -- Функция для обновления позиции окна
-    local function updateInput(input)
-        local delta = input.Position - dragStart
-        local position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X,
-            startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-        game:GetService('TweenService'):Create(frame, TweenInfo.new(dragSpeed), {Position = position}):Play()
-    end
-
-    -- Обработка начала перетаскивания
-    frame.InputBegan:Connect(function(input)
-        if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then 
-            dragToggle = true
-            dragStart = input.Position
-            startPos = frame.Position
-            input.Changed:Connect(function()
-                if input.UserInputState == Enum.UserInputState.End then
-                    dragToggle = false
-                end
-            end)
-        end
-    end)
-
-    -- Обработка перемещения мыши (или сенсорного ввода)
-    UIS.InputChanged:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-            if dragToggle then
-                Frame.Transparency = 1
-                updateInput(input)
-            else
-                Frame.Transparency = 1
-            end
-        end
-    end)
+	UIS.InputChanged:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+			if dragToggle then
+				Frame.Transparency = 1
+				updateInput(input)
+			else
+				Frame.Transparency = 1
+			end
+		end
+	end)
 end
 
 do -- Settings Initializer
@@ -3060,238 +3049,216 @@ do -- INFO FISH
 end
 
 local Tap = {
-	General = Window:AddTab({Title = "Основные", Icon = "box"}),  -- Основной раздел
-	Event = Window:AddTab({Title = "Событие", Icon = "star"}),  -- Раздел с событиями
-	Player = Window:AddTab({ Title = "Игрок", Icon = "user"}),  -- Раздел с настройками игрока
-	Shop = Window:AddTab({ Title = "Магазин", Icon = "shopping-bag"}),  -- Магазин
-	Configs = Window:AddTab({Title = "Настройки", Icon = "diamond"}),  -- Конфигурации
-	Teleport = Window:AddTab({Title = "Телепортация", Icon = "asterisk"}),  -- Телепортация
-	Settings = Window:AddTab({Title = "Настройки", Icon = "settings"})  -- Раздел настроек
+	General = Window:AddTab({Title = "Generals", Icon = "box"}),
+	Event = Window:AddTab({Title = "Event", Icon = "star"}),
+	Player = Window:AddTab({ Title = "Player", Icon = "user"}),
+	Shop = Window:AddTab({ Title = "Shopee", Icon = "shopping-bag"}),
+	Configs = Window:AddTab({Title = "Configs", Icon = "diamond"}),
+	Teleport = Window:AddTab({Title = "Teleport", Icon = "asterisk"}),
+	Settings = Window:AddTab({Title = "Settings", Icon = "settings"})
 }
 
--- Функция для создания переключателя
 Toggle = function(Section, NameIndex, Description, ConfigName, Function, ...)
-	local Misc = {...}  -- Дополнительные параметры
-	ConfigName = ConfigName or NameIndex  -- Имя конфигурации
-	local defaultState = Config[ConfigName] or false  -- Состояние по умолчанию
+	local Misc = {...}
+	ConfigName = ConfigName or NameIndex
+	local defaultState = Config[ConfigName] or false
 
-	-- Создание переключателя
 	local CreateToggle = Section:AddToggle((NameIndex or NameIndex.."-toggle"), {
-		Title = NameIndex or "null",  -- Название
-		Default = defaultState,  -- Состояние по умолчанию
-		Description = Description or "",  -- Описание
+		Title = NameIndex or "null",
+		Default = defaultState,
+		Description = Description or "",
 	})
 
-	-- Обработчик изменения состояния переключателя
 	CreateToggle:OnChanged(function(v)
-		Config[ConfigName] = v  -- Обновляем значение в конфигурации
-		save()  -- Сохраняем конфигурацию
+		Config[ConfigName] = v
+		save()
 		if Function then
-			Function(v)  -- Если передана функция, вызываем её
+			Function(v)
 		else
 			if AllFuncs[ConfigName] then
-				-- Если для этой конфигурации есть функция, выполняем её
 				local threadRunning = task.spawn(AllFuncs[ConfigName])
 
 				if not v and threadRunning then
-					task.cancel(threadRunning)  -- Если переключатель выключен, отменяем выполнение
+					task.cancel(threadRunning)
 				end
 			end
 		end
 	end)
 
-	return CreateToggle  -- Возвращаем созданный переключатель
+	return CreateToggle
 end
 
--- Функция для создания слайдера
-Slider = function(section, Name, min, max, Rounding, ...)
-	local SettingName, func = ...
-	if not func and type(SettingName) == "function" then func = SettingName end  -- Проверяем, не является ли SettingName функцией
-	if not SettingName then SettingName = Name end  -- Если имя не задано, берём имя из параметра Name
-	local default = Config[SettingName]  -- Значение по умолчанию из конфигурации
-
-	-- Создание слайдера
+Slider = function(section,Name,min,max,Rounding,...)
+	local SettingName,func = ...
+	if not func and type(SettingName) == "function" then func = SettingName end
+	if not SettingName then SettingName = Name end
+	local default = Config[SettingName]
 	local CreateSlider = section:AddSlider((Name or Name.."-slider"), {
-		Title = Name or "null",  -- Название слайдера
-		Min = min or 0,  -- Минимальное значение
-		Max = max or 1,  -- Максимальное значение
-		Default = (Config[SettingName] or default) or min,  -- Значение по умолчанию
-		Rounding = (Rounding == true and 1) or 0,  -- Округление
+		Title =Name or "null",
+		Min = min or 0,
+		Max = max or 1,
+		Default = (Config[SettingName] or default) or min,
+		Rounding = (Rounding == true and 1) or 0,
 	})
 
-	-- Обработчик изменения значения слайдера
 	CreateSlider:OnChanged(function(v)
-		save()  -- Сохраняем конфигурацию
-		Config[SettingName] = v  -- Обновляем значение в конфигурации
+		save()
+		Config[SettingName] = v
 	end)
-	task.wait()  -- Ожидаем завершения операции
-	return CreateSlider  -- Возвращаем созданный слайдер
+	task.wait()
+	return CreateSlider
 end
 
--- Функция для создания текстового поля
-TextBox = function(section, Name, tooltip, PlaceHolder, Numeric, ...)
-	local SettingName, func = ...
-	if not func and type(SettingName) == "function" then func = SettingName end  -- Проверяем, не является ли SettingName функцией
-	if not SettingName then SettingName = Name end  -- Если имя не задано, берём имя из параметра Name
-
-	-- Создание текстового поля
-	local CreateInput = section:AddInput((Name or Name.."-input"), {
-		Title = Name or "Null",  -- Название
-		Placeholder = PlaceHolder or "Введите текст здесь!",  -- Текст в поле ввода
-		Numeric = Numeric or false,  -- Если true, поле для чисел
-		Finished = true,  -- Завершающий символ
-		Description = tooltip or "",  -- Описание
-		Default = Config[SettingName],  -- Значение по умолчанию из конфигурации
+TextBox = function(section,Name,tooltip,PlaceHolder,Numberic,...)
+	local SettingName,func = ...
+	if not func and type(SettingName) == "function" then func = SettingName end
+	if not SettingName then SettingName = Name end
+	local CreateInput =section:AddInput((Name or Name.."-input"), {
+		Title =Name or "Null",
+		Placeholder = PlaceHolder or "Put text here!",
+		Numeric = Numberic or false,
+		Finished = true,
+		Description = tooltip or "",
+		Default = Config[SettingName],
 	})
 
-	-- Обработчик изменения значения в текстовом поле
 	CreateInput:OnChanged(function(value)
-		Config[SettingName] = value  -- Обновляем значение в конфигурации
-		save()  -- Сохраняем конфигурацию
+		Config[SettingName] = value
+		save()
 	end)
-	task.wait()  -- Ожидаем завершения операции
-	return CreateInput  -- Возвращаем созданное текстовое поле
+	task.wait()
+	return CreateInput
 end
 
--- Функция для создания выпадающего списка
 Dropdown = function(section, Name, default, list, multi, ...)
 	local SettingName, func = ...
 	if not func and type(SettingName) == "function" then func = SettingName end
-	SettingName = SettingName or Name  -- Имя настройки
+	SettingName = SettingName or Name
 
-	-- Если выбран многократный выбор
 	if multi then
 		default = (default or Config[SettingName]) or {}
 		if type(Config[SettingName]) == "string" then
-			Config[SettingName] = {Config[SettingName]}  -- Преобразуем строку в таблицу
+			Config[SettingName] = {Config[SettingName]}
 		end
 	else
-		default = (default or Config[SettingName]) or ""  -- Обычный выбор
+		default = (default or Config[SettingName]) or ""
 	end
 
-	-- Создание выпадающего списка
 	local CreateDropdown = section:AddDropdown((Name or Name.."-dropdown"), {
-		Title = Name or "Null",  -- Название
-		Values = list or {"None"},  -- Список значений
-		Multi = multi or false,  -- Поддержка множественного выбора
-		Default = default  -- Значение по умолчанию
+		Title = Name or "Null",
+		Values = list or {"None"},
+		Multi = multi or false,
+		Default = default
 	})
 
-	-- Обработчик изменения значения в выпадающем списке
 	CreateDropdown:OnChanged(function(v)
 		if multi and type(v) == 'table' then
-			Config[SettingName] = {}  -- Если это таблица (множественный выбор)
+			Config[SettingName] = {}
 			for _, selectedValue in pairs(v) do
-				table.insert(Config[SettingName], selectedValue)  -- Добавляем все выбранные значения
+				table.insert(Config[SettingName], selectedValue)
 			end
 		else
-			Config[SettingName] = v  -- Обычное изменение значения
+			Config[SettingName] = v
 		end
-		save()  -- Сохраняем изменения
+		save()
 		if func then
-			func(v)  -- Если передана функция, вызываем её
+			func(v)
 		end
 	end)
 
-	return CreateDropdown  -- Возвращаем созданный выпадающий список
+	return CreateDropdown
 end
 
--- Функция для фарма рыбы
+
 AllFuncs['Farm Fish'] = function()
-	local RodName = ReplicatedStorage.playerstats[LocalPlayer.Name].Stats.rod.Value  -- Имя удочки
+	local RodName = ReplicatedStorage.playerstats[LocalPlayer.Name].Stats.rod.Value
 	while Config['Farm Fish'] and task.wait() do
 		if Backpack:FindFirstChild(RodName) then
-			LocalPlayer.Character.Humanoid:EquipTool(Backpack:FindFirstChild(RodName))  -- Экипируем удочку
+			LocalPlayer.Character.Humanoid:EquipTool(Backpack:FindFirstChild(RodName))
 		end
 		if LocalPlayer.Character:FindFirstChild(RodName) and LocalPlayer.Character:FindFirstChild(RodName):FindFirstChild("bobber") then
-			-- Клонируем объект GPS для отображения
 			local XyzClone = game:GetService("ReplicatedStorage").resources.items.items.GPS.GPS.gpsMain.xyz:Clone()
 			XyzClone.Parent = game.Players.LocalPlayer.PlayerGui:WaitForChild("hud"):WaitForChild("safezone"):WaitForChild("backpack")
 			XyzClone.Name = "Lure"
 			XyzClone.Text = "<font color='#ff4949'>Lure </font>: 0%"
 			repeat
 				pcall(function()
-					-- Шейк UI для ловли рыбы
 					PlayerGui:FindFirstChild("shakeui").safezone:FindFirstChild("button").Size = UDim2.new(1001, 0, 1001, 0)
 					game:GetService("VirtualUser"):Button1Down(Vector2.new(1, 1))
 					game:GetService("VirtualUser"):Button1Up(Vector2.new(1, 1))
 				end)
-				-- Обновляем процент приманки
 				XyzClone.Text = "<font color='#ff4949'>Lure </font>: "..tostring(ExportValue(tostring(LocalPlayer.Character:FindFirstChild(RodName).values.lure.Value), 2)).."%"
 				RunService.Heartbeat:Wait()
 			until not LocalPlayer.Character:FindFirstChild(RodName) or LocalPlayer.Character:FindFirstChild(RodName).values.bite.Value or not Config['Farm Fish']
 			XyzClone.Text = "<font color='#ff4949'>FISHING!</font>"
 			delay(1.5, function()
-				XyzClone:Destroy()  -- Уничтожаем клонированный объект после ловли
+				XyzClone:Destroy()
 			end)
 			repeat
 				ReplicatedStorage.events.reelfinished:FireServer(1000000000000000000000000, true)
 				task.wait(.5)
 			until not LocalPlayer.Character:FindFirstChild(RodName) or not LocalPlayer.Character:FindFirstChild(RodName).values.bite.Value or not Config['Farm Fish']
 		else
-			LocalPlayer.Character:FindFirstChild(RodName).events.cast:FireServer(1000000000000000000000000)  -- Бросаем удочку
+			LocalPlayer.Character:FindFirstChild(RodName).events.cast:FireServer(1000000000000000000000000)
 			task.wait(2)
 		end
 	end
 end
 
--- Функция для продажи рыбы
+
 AllFuncs['Sell Fish'] = function()
 	while Config['Sell Fish'] and task.wait(3) do
-		game:GetService("ReplicatedStorage"):WaitForChild("events"):WaitForChild("selleverything"):InvokeServer()  -- Продаём рыбу
+		game:GetService("ReplicatedStorage"):WaitForChild("events"):WaitForChild("selleverything"):InvokeServer()
 	end
 end
 
--- Функция для перемещения в выбранную позицию
+
 AllFuncs['To Pos Stand'] = function()
 	while Config['To Pos Stand'] and task.wait() do
 		if not Config['SelectPositionStand'] then
-			Notify("Пожалуйста, выберите позицию")  -- Уведомление, если позиция не выбрана
+			Notify("Pls Select Position")
 			Config['To Pos Stand'] = false
 			return
 		end
 		pcall(function()
-			LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame = Config['SelectPositionStand']  -- Перемещаем в выбранную позицию
+			LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame = Config['SelectPositionStand']
 		end)
 	end
 end
 
--- Функция для включения/выключения скорости хождения
 AllFuncs['Toggle Walk Speed'] = function()
 	while Config['Toggle Walk Speed'] and task.wait() do
 		pcall(function()
-			LocalPlayer.Character:FindFirstChild("Humanoid").WalkSpeed = Config['Set Walk Speed']  -- Устанавливаем скорость
+			LocalPlayer.Character:FindFirstChild("Humanoid").WalkSpeed = Config['Set Walk Speed']
 		end)
 	end
 	if not Config['Toggle Walk Speed'] then
 		pcall(function()
-			LocalPlayer.Character:FindFirstChild("Humanoid").WalkSpeed = 16  -- Восстанавливаем скорость по умолчанию
+			LocalPlayer.Character:FindFirstChild("Humanoid").WalkSpeed = 16
 		end)
 	end
 end
 
--- Функция для включения/выключения силы прыжка
 AllFuncs['Toggle Jump Power'] = function()
 	while Config['Toggle Jump Power'] and task.wait() do
 		pcall(function()
-			LocalPlayer.Character:FindFirstChild("Humanoid").JumpPower = Config['Set Jump Power']  -- Устанавливаем силу прыжка
+			LocalPlayer.Character:FindFirstChild("Humanoid").JumpPower = Config['Set Jump Power']
 		end)
 	end
 	if not Config['Toggle Jump Power'] then
 		pcall(function()
-			LocalPlayer.Character:FindFirstChild("Humanoid").JumpPower = 50  -- Восстанавливаем силу прыжка по умолчанию
+			LocalPlayer.Character:FindFirstChild("Humanoid").JumpPower = 50
 		end)
 	end
 end
 
--- Функция для включения/выключения режима Ноклип (проходить сквозь объекты)
 AllFuncs['Toggle Noclip'] = function()
 	while Config['Toggle Noclip'] and task.wait() do
 		local charParts = LocalPlayer.Character:GetDescendants()
 		for i,v in pairs(charParts) do
 			if v:IsA("BasePart") and LocalPlayer.Character then
 				if v.CanCollide then
-					v.CanCollide = false  -- Отключаем коллизии
+					v.CanCollide = false
 				end
 			end
 		end
@@ -3300,19 +3267,17 @@ AllFuncs['Toggle Noclip'] = function()
 		local charParts = LocalPlayer.Character:GetDescendants()
 		for i,v in pairs(charParts) do
 			if v:IsA("BasePart") and LocalPlayer.Character then
-				v.CanCollide = true  -- Включаем коллизии
+				v.CanCollide = true
 			end
 		end
 	end
 end
 
--- Функция для получения аватара игрока
 GetPlayerProfile = function()
 	local Respone = game:HttpGet("https://thumbnails.roblox.com/v1/users/avatar-bust?userIds="..LocalPlayer.UserId.."&size=420x420&format=Png&isCircular=false")
-	return HttpService:JSONDecode(Respone)['data'][1]['imageUrl']  -- Возвращаем URL аватара
+	return HttpService:JSONDecode(Respone)['data'][1]['imageUrl']
 end
 
--- Функция для форматирования чисел с разделением на тысячи
 comma_value = function(Value)
 	local Calculated = Value
 	while true do
@@ -3323,7 +3288,6 @@ comma_value = function(Value)
 	return Calculated
 end
 
--- Функция для получения позиции игрока
 function GetPosition()
 	if not game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
 		return {
@@ -3339,86 +3303,73 @@ function GetPosition()
 	}
 end
 
--- Функция для экспорта значений с округлением до нужного количества знаков после запятой
 function ExportValue(arg1, arg2)
-	return tonumber(string.format("%."..(arg2 or 1)..'f', arg1))  -- Округление и преобразование в число
+	return tonumber(string.format("%."..(arg2 or 1)..'f', arg1))
 end
 
--- Функция для переключения сервера (Hop Server)
-AllFuncs.HopServer = function(FullServer) -- Переключение сервера (Low)
-	local FullServer = FullServer or false  -- Опция для полноценных серверов
+AllFuncs.HopServer = function(FullServer) -- Hop Server (Low)
+	local FullServer = FullServer or false
 
 	local Http = game:GetService("HttpService")
 	local Api = "https://games.roblox.com/v1/games/"
 
-	local _place = game.PlaceId  -- ID игры
-	local _servers = Api.._place.."/servers/Public?sortOrder=Asc&limit=100"  -- Ссылка на серверы
+	local _place = game.PlaceId
+	local _servers = Api.._place.."/servers/Public?sortOrder=Asc&limit=100"
 	local ListServers = function (cursor)
 		local Raw = game:HttpGet(_servers .. ((cursor and "&cursor="..cursor) or ""))
-		return Http:JSONDecode(Raw)  -- Получение списка серверов
+		return Http:JSONDecode(Raw)
 	end
 
-	-- Поиск доступного сервера
 	local Server, Next; repeat
 		local Servers = ListServers(Next)
 		Server = Servers.data[1]
 		Next = Servers.nextPageCursor
 	until Server
-
-	-- Перемещение на найденный сервер
 	repeat
 		if not FullServer then
-			game:GetService("TeleportService"):TeleportToPlaceInstance(_place, Server.id, game.Players.LocalPlayer)  -- Переключение на сервер
+			game:GetService("TeleportService"):TeleportToPlaceInstance(_place,Server.id,game.Players.LocalPlayer)
 		else
-			-- Получаем сервера, исключая переполненные
 			if request then
 				local servers = {}
-				local req = request({
-					Url = string.format("https://games.roblox.com/v1/games/%d/servers/Public?sortOrder=Desc&limit=100&excludeFullGames=true", game.PlaceId)
-				}).Body;
+				local req = request(
+					{
+						Url = string.format("https://games.roblox.com/v1/games/%d/servers/Public?sortOrder=Desc&limit=100&excludeFullGames=true", game.PlaceId)
+					}
+				).Body;
 				local body = game:GetService("HttpService"):JSONDecode(req)
 				if body and body.data then
 					for i, v in next, body.data do
-						-- Ищем сервера с меньшим числом игроков
 						if type(v) == "table" and tonumber(v.playing) and tonumber(v.maxPlayers) and v.playing < v.maxPlayers and v.id ~= game.JobId then
 							table.insert(servers, 1, v.id)
 						end
 					end
 				end
-				-- Переход на случайный сервер
 				if #servers > 0 then
 					game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, servers[math.random(1, #servers)], game.Players.LocalPlayer)
 				else
-					return "Не удалось найти сервер."
+					return "Couldn't find a server."
 				end
 			end
 		end
 		wait()
-	until game.PlaceId ~= game.PlaceId  -- Проверка на изменение игры
+	until game.PlaceId ~= game.PlaceId
 end
 
--- Переменная для отслеживания времени последней отправки
 local LastDely = tick()
-
--- Функция для отправки webhook (уведомлений)
 AllFuncs['Sending Webhook'] = function()
 	while Config['Sending Webhook'] and task.wait() do
 		if tick() - LastDely >= tonumber(Config['Delay Sending']) and (Config['Current Level'] or Config['Current Money']) then
-			LastDely = tick()  -- Обновляем время последней отправки
+			LastDely = tick()
 			local LevelDes = ""
 			local MoneyDes = ""
 			local AllFishInventory = ""
 			local BuySuccess = "**"
-			
-			-- Описание уровня
 			if Config['Current Level'] then
 				LevelDes = "\nNow Level : "..comma_value(LocalPlayer.leaderstats.Level.Value)
 			end
-			-- Описание денег
 			if Config['Current Money'] then
 				MoneyDes = "\nNow Money : "..tostring(LocalPlayer.PlayerGui.hud.safezone.coins.Text)
 			end
-			-- Описание рыбы в инвентаре
 			if Config['All Fish Inventory'] then
 				AllFishInventory = "```"
 				for i,v in pairs(GetFishInInventory()) do
@@ -3433,15 +3384,13 @@ AllFuncs['Sending Webhook'] = function()
 				end
 				AllFishInventory = AllFishInventory.."```"
 			end
-			
-			-- Отправка уведомления через webhook
 			local SendingSuccess = sendwebhook(Config['WebHook Configs'], {
 				["content"] = ((Config['Ping Discord Id'] and Config['"Discord Id'] ~= "") and "<@"..Config['"Discord Id']..">"),
 				["embeds"] = {
 					{
 						["id"]= 661605297,
-						["title"]= "уведомления рыб",
-						["description"] = "** Игрок : "..LocalPlayer.Name.."\n "..MoneyDes..""..LevelDes..""..AllFishInventory.."**",
+						["title"]= "Fisch Notify",
+						["description"] = "** Player : "..LocalPlayer.Name.."\n "..MoneyDes..""..LevelDes..""..AllFishInventory.."**",
 						["color"]= 8646911,
 						["fields"]= {},
 						["thumbnail"]= {
@@ -3454,18 +3403,15 @@ AllFuncs['Sending Webhook'] = function()
 					}
 				}
 			})
-
-			-- Уведомление об успешной отправке
 			if SendingSuccess then
-				Notify("Webhook успешно отправлен")
+				Notify("Sending WebHook Success")
 			else
-				Notify("Ошибка при отправке Webhook!")
+				Notify("Failed Sending WebHook!")
 			end
 		end
 	end
 end
 
--- Обработчик события, когда появляется новый объект "Safe Whirlpool"
 workspace.active.ChildAdded:Connect(function(child)
 	if Config['Safe Whirlpool Spawn'] and Config['WebHook Configs'] ~= "" then
 		if child.Name == "Safe Whirlpool" then
@@ -3480,8 +3426,8 @@ workspace.active.ChildAdded:Connect(function(child)
 				["embeds"] = {
 					{
 						["id"]= 661605297,
-						["title"]= "уведомление о рыб",
-						["description"] = "** Игрок : "..LocalPlayer.Name.."\n Найдено Safe Whirlpool\n Позиция : "..StringInput.."**",
+						["title"]= "Fisch Notify",
+						["description"] = "** Player : "..LocalPlayer.Name.."\n Found Safe Whirlpool\n Position : "..StringInput.."**",
 						["color"]= 8646911,
 						["fields"]= {},
 						["thumbnail"]= {
@@ -3494,17 +3440,15 @@ workspace.active.ChildAdded:Connect(function(child)
 					}
 				}
 			})
-			-- Уведомление об успешной отправке
 			if SendingSuccess then
-				Notify("Webhook успешно отправлен")
+				Notify("Sending WebHook Success")
 			else
-				Notify("Ошибка при отправке Webhook!")
+				Notify("Failed Sending WebHook!")
 			end
 		end
 	end
 end)
 
--- Раздел на интерфейсе для выбора позиции и других настроек
 Main = Tap.General:AddSection('General') do
 	SelectPosition = Main:AddParagraph({        
 		Title = "Position : N/A"
@@ -3512,15 +3456,13 @@ Main = Tap.General:AddSection('General') do
 	Toggle(Main, "Auto Farm Fish","", "Farm Fish")
 	Toggle(Main, "Teleport To Select Position","", "To Pos Stand")
 	Main:AddButton({
-		Title = "Выберите позицию",
+		Title = "Select Position",
 		Callback = function()
 			Config['SelectPositionStand'] = LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame
 			SelectPosition:SetTitle("Position : "..tostring(math.floor(LocalPlayer.Character:FindFirstChild("HumanoidRootPart").Position.X)).." X "..tostring(math.floor(LocalPlayer.Character:FindFirstChild("HumanoidRootPart").Position.Y)).." Y "..tostring(math.floor(LocalPlayer.Character:FindFirstChild("HumanoidRootPart").Position.Z)).." Z")
 		end
 	})
 end
-
--- Сбор ингредиентов (предметов)
 IngredientList = {}
 for i,v in pairs(workspace.active:GetDescendants()) do
 	if v.ClassName == "TextLabel" and v.Text == "Ingredient" then
@@ -3546,13 +3488,11 @@ for i,v in pairs(workspace.active:GetDescendants()) do
 	end
 end
 
--- Проверка наличия предмета в рюкзаке
 _hasItem = function(name)
 	if Backpack:FindFirstChild(name) then return true end
 	if LocalPlayer.Character:FindFirstChild(name) then return true end
 end
 
--- Поток для обновления списка ингредиентов
 Threads[#Threads+1] = task.spawn(function()
 	while wait(.75) do
 		table.clear(IngredientList)
@@ -3633,7 +3573,7 @@ AllFuncs['Auto Find Boat Event'] = function()
 					["embeds"] = {
 						{
 							["id"]= 661605297,
-							["title"]= "рыба Уведомить",
+							["title"]= "Fisch Notify",
 							["description"] = "** Player : "..LocalPlayer.Name.."\n Trade Witches Ingredient Success **",
 							["color"]= 8646911,
 							["fields"]= {},
@@ -3668,7 +3608,7 @@ Event = Tap.Event:AddSection('Event') do
 	Toggle(Event, "Back To Auto Fishing","", "Back To Fishing")
 	Toggle(Event, "Hop Server","Hop Server For Not Found Ingredient", "Hop Not Found Ingredient")
 	Event:AddButton({
-		Title = "Телепортироваться к ингредиенту",
+		Title = "Teleport To Ingredient",
 		Callback = function()
 			if Config['Ingredient Select'] == "" then
 				Notify("Pls Select Ingredient ")
@@ -3689,7 +3629,7 @@ Event = Tap.Event:AddSection('Event') do
 	})
 	
 	Event:AddButton({
-		Title = "Обновить ингредиент",
+		Title = "Refresh Ingredient",
 		Callback = function()
 			IngredientDropdwon:SetValues(IngredientList)
 		end
@@ -3700,19 +3640,19 @@ Seller = Tap.General:AddSection('Seller') do
 	Toggle(Seller, "Auto Sell Fish","", "Sell Fish")
 
 	Seller:AddButton({
-		Title = "продать все рыбы",
+		Title = "Sell All Fish",
 		Callback = function()
 			ReplicatedStorage:WaitForChild("events"):WaitForChild("selleverything"):InvokeServer()
 		end
 	})
 	Seller:AddButton({
-		Title = "продать все рыбы ( In Hand )",
+		Title = "Sell Fish ( In Hand )",
 		Callback = function()
 			workspace.world.npcs:FindFirstChild("Marc Merchant").merchant.sell:InvokeServer()
 		end
 	})
 	Seller:AddButton({
-		Title = "купить корабль (ui)",
+		Title = "Show Ui Buy Boat",
 		Callback = function()
 			PlayerGui.hud.safezone.shipwright.Visible = not PlayerGui.hud.safezone.shipwright.Visible 
 		end
@@ -3726,21 +3666,21 @@ end
 
 InfoFish = Tap.General:AddSection('Info Fish') do
 	InfoPrice = InfoFish:AddParagraph({        
-		Title = "Рис: N/A"
+		Title = "Pice : N/A"
 	})
 	InfoRarity = InfoFish:AddParagraph({        
-		Title = "Редкость: N/A"
+		Title = "Rarity : N/A"
 	})
 	InfoChance = InfoFish:AddParagraph({        
-		Title = "Шанс: N/A"
+		Title = "Chance : N/A"
 	})
 	InfoFavouriteBait = InfoFish:AddParagraph({        
-		Title = "ЛюбимаяПриманка : N/A"
+		Title = "FavouriteBait : N/A"
 	})
 	
 	Dropdown(InfoFish, "Select Fish", "", FishList, false, "Select Fish Info")
 	InfoFish:AddButton({
-		Title = "Получить информацию Рыба в руке",
+		Title = "Get Info Fish In Hand",
 		Callback = function()
 			for i,v in pairs(LocalPlayer.Character:GetChildren()) do
 				if table.find(FishList, v.Name) then
@@ -3756,7 +3696,7 @@ InfoFish = Tap.General:AddSection('Info Fish') do
 		end
 	})
 	InfoFish:AddButton({
-		Title = "получить инфу про рыбу",
+		Title = "Get Info Fish",
 		Callback = function()
 			if Config['Select Fish Info'] == "" then
 				Notify("Pls Select Fish")
@@ -3842,7 +3782,7 @@ MiscPlayer = Tap.Player:AddSection('Misc Player') do
 			end
 		end
 	end)
-	Toggle(MiscPlayer, "видеть ночью", "", "Remove Fog", function(Value)
+	Toggle(MiscPlayer, "Remove Fog", "", "Remove Fog", function(Value)
 		if Value then
 			if game:GetService("Lighting"):FindFirstChild("Sky") then
 				game:GetService("Lighting"):FindFirstChild("Sky").Parent = game:GetService("Lighting").bloom
@@ -3867,21 +3807,21 @@ MiscPlayer = Tap.Player:AddSection('Misc Player') do
 	end)
 	
 	MiscPlayer:AddButton({
-		Title = "перезайти на сервер",
+		Title = "Rejoin Server",
 		Description = "",
 		Callback = function()
 			TeleportService:TeleportToPlaceInstance(game.placeId, game.jobId, game.Players.LocalPlayer);
 		end,
 	})
 	MiscPlayer:AddButton({
-		Title = "перезапуск на другой сервер",
+		Title = "Hop Server",
 		Description = "",
 		Callback = function()
 			AllFuncs.HopServer(true)
 		end
 	})
 	MiscPlayer:AddButton({
-		Title = "тп на пустой сервер",
+		Title = "Hop Server Low",
 		Description = "",
 		Callback = function()
 			AllFuncs.HopServer(false)
@@ -3890,12 +3830,12 @@ MiscPlayer = Tap.Player:AddSection('Misc Player') do
 end
 
 Shoppy = Tap.Shop:AddSection('Shop All') do
-	Toggle(Shoppy, "Телепорт к покупке", "", "Teleport To Buy")
+	Toggle(Shoppy, "Teleport To Buy", "", "Teleport To Buy")
 	for i,v in pairs(workspace.world.interactables:GetDescendants()) do
 		if v.Name == "purchaserompt" or v.ClassName == "ProximityPrompt" then
 			v.HoldDuration = 0
 			Shoppy:AddButton({
-				Title = "купить "..v.Parent.Name,
+				Title = "Buy "..v.Parent.Name,
 				Description = v.ActionText,
 				Callback = function()
 					if fireproximityprompt and not Config['Teleport To Buy'] then
@@ -3917,7 +3857,7 @@ Shoppy = Tap.Shop:AddSection('Shop All') do
 	end
 end
 Shoppy:AddButton({
-    Title = "Купить инчант удочку",
+    Title = "Buy Enchant Relic",
     Description = "View [11,000C$]",
     Callback = function()
         local player = game.Players.LocalPlayer
@@ -3950,7 +3890,7 @@ WebHookConfigs = Tap.Configs:AddSection('WebHook') do
 	Toggle(WebHookConfigs, "Ping Discord Id","","Ping Discord Id")
 	
 	WebHookConfigs:AddButton({
-		Title = "Тестирование веб-перехватчика",
+		Title = "Test WebHook",
 		Description = "",
 		Callback = function()
 			local SendingSuccess = sendwebhook(Config['WebHook Configs'], {
@@ -3958,7 +3898,7 @@ WebHookConfigs = Tap.Configs:AddSection('WebHook') do
 				["embeds"] = {
 					{
 						["id"]= 661605297,
-						["title"]= "Рыба уведомление",
+						["title"]= "Fisch Notify",
 						["description"] = "** Player : "..LocalPlayer.Name.."\n THIS TESTING WEBHOOK**",
 						["color"]= 8646911,
 						["fields"]= {},
@@ -4032,210 +3972,197 @@ WebHookConfigsData = Tap.Configs:AddSection('Data Sending') do
 	Toggle(WebHookConfigsData, "Halloween Success","","Halloween Success")
 end
 
-Teleporting = Tap.Teleport:AddSection('Телепортация') do
-    -- Кнопка для телепортации на "Остров Санстоун"
-    Teleporting:AddButton({
-        Title = "Остров Санстоун",
-        Callback = function()
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-913.630615234375, 137.29348754882812, -1129.8995361328125)
-        end
-    })
-
-    -- Кнопка для телепортации на "Рослит Бэй"
-    Teleporting:AddButton({
-        Title = "Рослит Бэй",
-        Callback = function()
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1501.675537109375, 133, 416.2070007324219)
-        end
-    })
-
-    -- Кнопка для телепортации на "Случайные острова"
-    Teleporting:AddButton({
-        Title = "Случайные острова",
-        Callback = function()
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(237.6944580078125, 139.34976196289062, 43.103424072265625)
-        end
-    })
-
-    -- Кнопка для телепортации на "Мусвуд"
-    Teleporting:AddButton({
-        Title = "Мусвуд",
-        Callback = function()
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(433.7972106933594, 147.07003784179688, 261.80218505859375)
-        end
-    })
-
-    -- Кнопка для телепортации на "Исполнительный штаб"
-    Teleporting:AddButton({
-        Title = "Исполнительный штаб",
-        Callback = function()
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-36.46199035644531, -246.55001831054688, 205.77120971679688)
-        end
-    })
-
-    -- Кнопка для телепортации на "Зачарование комната"
-    Teleporting:AddButton({
-        Title = "Зачарование комната",
-        Callback = function()
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1310.048095703125, -805.292236328125, -162.34507751464844)
-        end
-    })
-
-    -- Кнопка для телепортации на "Статуя Суверенитета"
-    Teleporting:AddButton({
-        Title = "Статуя Суверенитета",
-        Callback = function()
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(22.098665237426758, 159.01470947265625, -1039.8543701171875)
-        end
-    })
-
-    -- Кнопка для телепортации на "Мушгроувское болото"
-    Teleporting:AddButton({
-        Title = "Мушгроувское болото",
-        Callback = function()
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2442.805908203125, 130.904052734375, -686.1648559570312)
-        end
-    })
-
-    -- Кнопка для телепортации на "Снежный остров"
-    Teleporting:AddButton({
-        Title = "Снежный остров",
-        Callback = function()
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2589.534912109375, 134.9249267578125, 2333.099365234375)
-        end
-    })
-
-    -- Кнопка для телепортации на "Остров Террапинов"
-    Teleporting:AddButton({
-        Title = "Остров Террапинов",
-        Callback = function()
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(152.3716278076172, 154.91015625, 2000.9171142578125)
-        end
-    })
-
-    -- Кнопка для телепортации на "Зачарованный Реликт"
-    Teleporting:AddButton({
-        Title = "Зачарованный Реликт",
-        Callback = function()
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1309.2784423828125, -802.427001953125, -83.36397552490234)
-        end
-    })
-end
-
--- Кнопка для телепортации на "Остров Террапинов"
+Teleporting = Tap.Teleport:AddSection('Teleport') do
+	-- Teleporting button for "Sunstone Island"
 Teleporting:AddButton({
-    Title = "Лучшее Место",  -- Заголовок кнопки
-    Callback = function()  -- Функция, которая выполняется при нажатии кнопки
-        local forceFieldPart = Instance.new("Part")  -- Создаём новый объект "Part"
-        forceFieldPart.Size = Vector3.new(10, 1, 10)  -- Задаём размер (10x1x10)
-        forceFieldPart.Position = Vector3.new(1447.8507080078125, 131.49998474121094, -7649.64501953125)  -- Устанавливаем позицию
-        forceFieldPart.Anchored = true  -- Закрепляем объект, чтобы он не падал
-        forceFieldPart.BrickColor = BrickColor.new("White")  -- Устанавливаем белый цвет
-        forceFieldPart.Material = Enum.Material.SmoothPlastic  -- Устанавливаем материал
-        forceFieldPart.Parent = game.Workspace  -- Размещаем объект в Workspace
-
-        -- Создаём ForceField (щит)
-        local forceField = Instance.new("ForceField")  -- Создаём ForceField
-        forceField.Parent = forceFieldPart  -- Размещаем ForceField на объекте
-        wait()  -- Пауза
-        -- Телепортируем игрока на заданные координаты
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1447.8507080078125, 133.49998474121094, -7649.64501953125)
+    Title = "Sunstone Island",
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-913.630615234375, 137.29348754882812, -1129.8995361328125)
     end
 })
 
--- Функция для отправки данных на вебхук
+-- Teleporting button for "Roslit Bay"
+Teleporting:AddButton({
+    Title = "Roslit Bay",
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1501.675537109375, 133, 416.2070007324219)
+    end
+})
+
+-- Teleporting button for "Random Islands"
+Teleporting:AddButton({
+    Title = "Random Islands",
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(237.6944580078125, 139.34976196289062, 43.103424072265625)
+    end
+})
+
+-- Teleporting button for "Moosewood"
+Teleporting:AddButton({
+    Title = "Moosewood",
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(433.7972106933594, 147.07003784179688, 261.80218505859375)
+    end
+})
+
+-- Teleporting button for "Executive Headquarters"
+Teleporting:AddButton({
+    Title = "Executive Headquarters",
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-36.46199035644531, -246.55001831054688, 205.77120971679688)
+    end
+})
+
+-- Teleporting button for "Enchant Room"
+Teleporting:AddButton({
+    Title = "Enchant Room",
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1310.048095703125, -805.292236328125, -162.34507751464844)
+    end
+})
+
+-- Teleporting button for "Statue Of Sovereignty"
+Teleporting:AddButton({
+    Title = "Statue Of Sovereignty",
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(22.098665237426758, 159.01470947265625, -1039.8543701171875)
+    end
+})
+
+-- Teleporting button for "Mushgrove Swamp"
+Teleporting:AddButton({
+    Title = "Mushgrove Swamp",
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2442.805908203125, 130.904052734375, -686.1648559570312)
+    end
+})
+
+-- Teleporting button for "Snowcap Island"
+Teleporting:AddButton({
+    Title = "Snowcap Island",
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2589.534912109375, 134.9249267578125, 2333.099365234375)
+    end
+})
+
+-- Teleporting button for "Terrapin Island"
+Teleporting:AddButton({
+    Title = "Terrapin Island",
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(152.3716278076172, 154.91015625, 2000.9171142578125)
+    end
+})
+
+-- Teleporting button for "Terrapin Island"
+Teleporting:AddButton({
+    Title = "Enchant Relic",
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1309.2784423828125, -802.427001953125, -83.36397552490234)
+    end
+})
+
+-- Teleporting button for "Terrapin Island"
+Teleporting:AddButton({
+    Title = "Best Spot",
+    Callback = function()
+    local forceFieldPart = Instance.new("Part") -- Create a new part
+forceFieldPart.Size = Vector3.new(10, 1, 10) -- Set the size of the part (10x1x10)
+forceFieldPart.Position = Vector3.new(1447.8507080078125, 131.49998474121094, -7649.64501953125) -- Adjusted position (2 units lower)
+forceFieldPart.Anchored = true -- Make sure the part does not fall
+forceFieldPart.BrickColor = BrickColor.new("White") -- Set the color of the part to white
+forceFieldPart.Material = Enum.Material.SmoothPlastic -- Set the material of the part
+forceFieldPart.Parent = game.Workspace -- Parent the part to the Workspace
+
+-- Create a ForceField
+local forceField = Instance.new("ForceField") -- Create a new ForceField object
+forceField.Parent = forceFieldPart -- Parent the ForceField to the part
+wait()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1447.8507080078125, 133.49998474121094, -7649.64501953125)
+    end
+})
+end
+
+
 function sendwebhook(url, data)
-    local HttpService = game:GetService("HttpService")
-    local success, newdata = pcall(function()
-        return HttpService:JSONEncode(data)  -- Преобразуем данные в формат JSON
-    end)
-    if not success then
-        print("Ошибка кодирования данных в JSON:", newdata)
-        return
-    end
-    local headers = {
-        ["Content-Type"] = "application/json"  -- Устанавливаем тип контента как JSON
-    }
-    -- Отправляем POST-запрос
-    local success, response = pcall(function()
-        return request({
-            Url = url,
-            Body = newdata,
-            Method = "POST",
-            Headers = headers
-        })
-    end)
-    return success  -- Возвращаем результат
+	local HttpService = game:GetService("HttpService")
+	local success, newdata = pcall(function()
+		return HttpService:JSONEncode(data)
+	end)
+	if not success then
+		print("Error encoding data to JSON:", newdata)
+		return
+	end
+	local headers = {
+		["Content-Type"] = "application/json"
+	}
+	local success, response = pcall(function()
+		return request({
+			Url = url,
+			Body = newdata,
+			Method = "POST",
+			Headers = headers
+		})
+	end)
+	return success
 end
 
--- Отключение AFK-системы и автоматическое движение
 local Old = os.time()
-task.spawn(function()
-    warn("ANTI AFK СИСТЕМА ЗАПУЩЕНА")
-    pcall(function()
-        -- Отключаем все соединения с событием Idled
-        for i,v in pairs(getconnections(Client.Idled)) do
-            v:Disable() 
-        end
-        -- Когда игрок не активен, симулируем нажатие правой кнопки мыши
-        Client.Idled:connect(function()
-            game:GetService("VirtualUser"):Button2Down(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
-            wait(1)
-            game:GetService("VirtualUser"):Button2Up(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
-        end)
-        -- Каждый 5 минут имитируем нажатие правой кнопки для предотвращения AFK
-        while wait(300) do
-            game:GetService("VirtualUser"):Button2Down(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
-            wait(1)
-            game:GetService("VirtualUser"):Button2Up(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
-        end
-    end)
-end)
-
--- Создание секции настроек
+	task.spawn(function(InitializeService)
+		warn("ANTI AFK STARTING")
+		pcall(function()
+			for i,v in pairs(getconnections(Client.Idled)) do
+				v:Disable() 
+			end
+			Client.Idled:connect(function()
+				game:GetService("VirtualUser"):Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+				wait(1)
+				game:GetService("VirtualUser"):Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+			end)
+			while wait(300) do
+				game:GetService("VirtualUser"):Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+				wait(1)
+				game:GetService("VirtualUser"):Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+			end
+		end)
+	end)
 do
-    Settings_M = Tap.Settings:AddSection("Разное") do
-        Timeing = Settings_M:AddParagraph({        
-            Title = "Время на сервере"
-        })
-        -- Включение/выключение автоматической загрузки конфигов
-        Toggle(Settings_M, "Автозагрузка конфигов", "", "AutoLoadingConfigs", function(v)
-            writefile(tostring(LocalPlayer.UserId).."ALC.txt", tostring(v))
-        end)
-        -- Кнопка для перехода в Discord
-        Settings_M:AddButton({
-            Title = "Присоединиться к Discord Normal Hub",
-            Description = "Нажмите, чтобы присоединиться",
-            Callback = function()
-                -- Код для перехода в Discord (нужно добавить ссылку)
-            end,
-        })
-    end
+	Settings_M = Tap.Settings:AddSection("Misc") do
+		Timeing = Settings_M:AddParagraph({        
+			Title = "Timeing Server"
+		})
+		Toggle(Settings_M, "Auto Loading Configs", "", "AutoLoadingConfigs", function(v)
+			writefile(tostring(LocalPlayer.UserId).."ALC.txt", tostring(v))
+		end)
+		Settings_M:AddButton({
+			Title = "Join Normal Hub Discord",
+			Description = "Click to join",
+			Callback = function()
 
-    -- Обновление времени на сервере
-    RunService.Heartbeat:Connect(function()
-        local TimeSinceLastPlay = os.time() - Old
-        local hours = tostring(math.floor(TimeSinceLastPlay / 3600))
-        local minutes = tostring(math.floor((TimeSinceLastPlay % 3600) / 60))
-        local seconds = tostring(TimeSinceLastPlay % 60)
-        Timeing:SetTitle("Вы на сервере: " .. hours .. " ч " .. minutes .. " мин " .. seconds .. " сек")
-    end)
-end
+			end,
+		})
+	end
 
--- Инициализация интерфейса
-InterfaceManager:SetLibrary(Fluent)
-InterfaceManager:SetFolder("Normal Hub")
-InterfaceManager:BuildInterfaceSection(Tap.Settings)
-Window:SelectTab(1)
-SaveManager:LoadAutoloadConfig()
-Fluent:SetTheme("Amethyst")
-setfflag("TaskSchedulerTargetFps", "1000")
+	RunService.Heartbeat:Connect(function() -- All RunService
+		local TimeSinceLastPlay = os.time() - Old
+		local hours = tostring(math.floor(TimeSinceLastPlay / 3600))
+		local minutes = tostring(math.floor((TimeSinceLastPlay % 3600) / 60))
+		local seconds = tostring(TimeSinceLastPlay % 60)
+		Timeing:SetTitle("Server Joined "..hours.." H "..minutes.." M "..seconds.." S ")
+	end)
+
+
+	InterfaceManager:SetLibrary(Fluent)
+	InterfaceManager:SetFolder("Normal Hub")
+	InterfaceManager:BuildInterfaceSection(Tap.Settings)
+	Window:SelectTab(1)
+	SaveManager:LoadAutoloadConfig()
+	Fluent:SetTheme("Amethyst")
+	setfflag("TaskSchedulerTargetFps", "1000")
 setfpscap(120)
-
--- Установка FPS ограничения
 while true do
     if (game:GetService("Workspace").DistributedGameTime % 1 * 60) > 30 then
         setfpscap(120)
     end
     wait(0)
+end
 end
