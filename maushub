@@ -3426,7 +3426,7 @@ workspace.active.ChildAdded:Connect(function(child)
 				["embeds"] = {
 					{
 						["id"]= 661605297,
-						["title"]= "Fisch Notify",
+						["title"]= "Фиш Уведомить",
 						["description"] = "** Player : "..LocalPlayer.Name.."\n Found Safe Whirlpool\n Position : "..StringInput.."**",
 						["color"]= 8646911,
 						["fields"]= {},
@@ -3451,12 +3451,12 @@ end)
 
 Main = Tap.General:AddSection('General') do
 	SelectPosition = Main:AddParagraph({        
-		Title = "Position : N/A"
+		Title = "Позиция : N/A"
 	})
 	Toggle(Main, "Auto Farm Fish","", "Farm Fish")
 	Toggle(Main, "Teleport To Select Position","", "To Pos Stand")
 	Main:AddButton({
-		Title = "Select Position",
+		Title = "Выберите позицию",
 		Callback = function()
 			Config['SelectPositionStand'] = LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame
 			SelectPosition:SetTitle("Position : "..tostring(math.floor(LocalPlayer.Character:FindFirstChild("HumanoidRootPart").Position.X)).." X "..tostring(math.floor(LocalPlayer.Character:FindFirstChild("HumanoidRootPart").Position.Y)).." Y "..tostring(math.floor(LocalPlayer.Character:FindFirstChild("HumanoidRootPart").Position.Z)).." Z")
@@ -3573,7 +3573,7 @@ AllFuncs['Auto Find Boat Event'] = function()
 					["embeds"] = {
 						{
 							["id"]= 661605297,
-							["title"]= "Fisch Notify",
+							["title"]= "Фиш Уведомить",
 							["description"] = "** Player : "..LocalPlayer.Name.."\n Trade Witches Ingredient Success **",
 							["color"]= 8646911,
 							["fields"]= {},
@@ -3608,7 +3608,7 @@ Event = Tap.Event:AddSection('Event') do
 	Toggle(Event, "Back To Auto Fishing","", "Back To Fishing")
 	Toggle(Event, "Hop Server","Hop Server For Not Found Ingredient", "Hop Not Found Ingredient")
 	Event:AddButton({
-		Title = "Teleport To Ingredient",
+		Title = "Телепортироваться к ингредиенту",
 		Callback = function()
 			if Config['Ingredient Select'] == "" then
 				Notify("Pls Select Ingredient ")
@@ -3629,7 +3629,7 @@ Event = Tap.Event:AddSection('Event') do
 	})
 	
 	Event:AddButton({
-		Title = "Refresh Ingredient",
+		Title = "Обновить ингредиент",
 		Callback = function()
 			IngredientDropdwon:SetValues(IngredientList)
 		end
@@ -3640,19 +3640,19 @@ Seller = Tap.General:AddSection('Seller') do
 	Toggle(Seller, "Auto Sell Fish","", "Sell Fish")
 
 	Seller:AddButton({
-		Title = "Sell All Fish",
+		Title = "Продать всю рыбу",
 		Callback = function()
 			ReplicatedStorage:WaitForChild("events"):WaitForChild("selleverything"):InvokeServer()
 		end
 	})
 	Seller:AddButton({
-		Title = "Sell Fish ( In Hand )",
+		Title = "Продать рыбу (в руке)",
 		Callback = function()
 			workspace.world.npcs:FindFirstChild("Marc Merchant").merchant.sell:InvokeServer()
 		end
 	})
 	Seller:AddButton({
-		Title = "Show Ui Buy Boat",
+		Title = "Показать интерфейс Купить лодку",
 		Callback = function()
 			PlayerGui.hud.safezone.shipwright.Visible = not PlayerGui.hud.safezone.shipwright.Visible 
 		end
@@ -3666,16 +3666,16 @@ end
 
 InfoFish = Tap.General:AddSection('Info Fish') do
 	InfoPrice = InfoFish:AddParagraph({        
-		Title = "Pice : N/A"
+		Title = "Пайс : N/A"
 	})
 	InfoRarity = InfoFish:AddParagraph({        
-		Title = "Rarity : N/A"
+		Title = "Редкость : N/A"
 	})
 	InfoChance = InfoFish:AddParagraph({        
-		Title = "Chance : N/A"
+		Title = "Шанс : N/A"
 	})
 	InfoFavouriteBait = InfoFish:AddParagraph({        
-		Title = "FavouriteBait : N/A"
+		Title = "ЛюбимаяПриманка : N/A"
 	})
 	
 	Dropdown(InfoFish, "Select Fish", "", FishList, false, "Select Fish Info")
@@ -3696,7 +3696,7 @@ InfoFish = Tap.General:AddSection('Info Fish') do
 		end
 	})
 	InfoFish:AddButton({
-		Title = "Get Info Fish",
+		Title = "Получить информацию о рыбе",
 		Callback = function()
 			if Config['Select Fish Info'] == "" then
 				Notify("Pls Select Fish")
@@ -3807,21 +3807,21 @@ MiscPlayer = Tap.Player:AddSection('Misc Player') do
 	end)
 	
 	MiscPlayer:AddButton({
-		Title = "Rejoin Server",
+		Title = "Воссоединиться с сервером",
 		Description = "",
 		Callback = function()
 			TeleportService:TeleportToPlaceInstance(game.placeId, game.jobId, game.Players.LocalPlayer);
 		end,
 	})
 	MiscPlayer:AddButton({
-		Title = "Hop Server",
+		Title = "Хоп-сервер",
 		Description = "",
 		Callback = function()
 			AllFuncs.HopServer(true)
 		end
 	})
 	MiscPlayer:AddButton({
-		Title = "Hop Server Low",
+		Title = "Низкий уровень сервера перехода",
 		Description = "",
 		Callback = function()
 			AllFuncs.HopServer(false)
@@ -3857,7 +3857,7 @@ Shoppy = Tap.Shop:AddSection('Shop All') do
 	end
 end
 Shoppy:AddButton({
-    Title = "Buy Enchant Relic",
+    Title = "Купить реликвию чар",
     Description = "View [11,000C$]",
     Callback = function()
         local player = game.Players.LocalPlayer
@@ -3890,7 +3890,7 @@ WebHookConfigs = Tap.Configs:AddSection('WebHook') do
 	Toggle(WebHookConfigs, "Ping Discord Id","","Ping Discord Id")
 	
 	WebHookConfigs:AddButton({
-		Title = "Test WebHook",
+		Title = "Тестирование веб-перехватчика",
 		Description = "",
 		Callback = function()
 			local SendingSuccess = sendwebhook(Config['WebHook Configs'], {
@@ -3898,7 +3898,7 @@ WebHookConfigs = Tap.Configs:AddSection('WebHook') do
 				["embeds"] = {
 					{
 						["id"]= 661605297,
-						["title"]= "Fisch Notify",
+						["title"]= "Фиш Уведомить",
 						["description"] = "** Player : "..LocalPlayer.Name.."\n THIS TESTING WEBHOOK**",
 						["color"]= 8646911,
 						["fields"]= {},
@@ -3975,7 +3975,7 @@ end
 Teleporting = Tap.Teleport:AddSection('Teleport') do
 	-- Teleporting button for "Sunstone Island"
 Teleporting:AddButton({
-    Title = "Sunstone Island",
+    Title = "Остров Санстоун",
     Callback = function()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-913.630615234375, 137.29348754882812, -1129.8995361328125)
     end
@@ -3983,7 +3983,7 @@ Teleporting:AddButton({
 
 -- Teleporting button for "Roslit Bay"
 Teleporting:AddButton({
-    Title = "Roslit Bay",
+    Title = "Рослит Бэй",
     Callback = function()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1501.675537109375, 133, 416.2070007324219)
     end
@@ -3991,7 +3991,7 @@ Teleporting:AddButton({
 
 -- Teleporting button for "Random Islands"
 Teleporting:AddButton({
-    Title = "Random Islands",
+    Title = "Случайные острова",
     Callback = function()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(237.6944580078125, 139.34976196289062, 43.103424072265625)
     end
@@ -3999,7 +3999,7 @@ Teleporting:AddButton({
 
 -- Teleporting button for "Moosewood"
 Teleporting:AddButton({
-    Title = "Moosewood",
+    Title = "Мусвуд",
     Callback = function()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(433.7972106933594, 147.07003784179688, 261.80218505859375)
     end
@@ -4007,7 +4007,7 @@ Teleporting:AddButton({
 
 -- Teleporting button for "Executive Headquarters"
 Teleporting:AddButton({
-    Title = "Executive Headquarters",
+    Title = "Исполнительный штаб",
     Callback = function()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-36.46199035644531, -246.55001831054688, 205.77120971679688)
     end
@@ -4015,7 +4015,7 @@ Teleporting:AddButton({
 
 -- Teleporting button for "Enchant Room"
 Teleporting:AddButton({
-    Title = "Enchant Room",
+    Title = "Зачарования комната",
     Callback = function()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1310.048095703125, -805.292236328125, -162.34507751464844)
     end
@@ -4023,7 +4023,7 @@ Teleporting:AddButton({
 
 -- Teleporting button for "Statue Of Sovereignty"
 Teleporting:AddButton({
-    Title = "Statue Of Sovereignty",
+    Title = "Статуя Суверенитета",
     Callback = function()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(22.098665237426758, 159.01470947265625, -1039.8543701171875)
     end
@@ -4039,7 +4039,7 @@ Teleporting:AddButton({
 
 -- Teleporting button for "Snowcap Island"
 Teleporting:AddButton({
-    Title = "Snowcap Island",
+    Title = "Снежный остров",
     Callback = function()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2589.534912109375, 134.9249267578125, 2333.099365234375)
     end
@@ -4047,7 +4047,7 @@ Teleporting:AddButton({
 
 -- Teleporting button for "Terrapin Island"
 Teleporting:AddButton({
-    Title = "Terrapin Island",
+    Title = "Остров Террапин",
     Callback = function()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(152.3716278076172, 154.91015625, 2000.9171142578125)
     end
@@ -4055,7 +4055,7 @@ Teleporting:AddButton({
 
 -- Teleporting button for "Terrapin Island"
 Teleporting:AddButton({
-    Title = "Enchant Relic",
+    Title = "Зачаровать реликвию",
     Callback = function()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1309.2784423828125, -802.427001953125, -83.36397552490234)
     end
@@ -4063,7 +4063,7 @@ Teleporting:AddButton({
 
 -- Teleporting button for "Terrapin Island"
 Teleporting:AddButton({
-    Title = "Best Spot",
+    Title = "Лучшее место",
     Callback = function()
     local forceFieldPart = Instance.new("Part") -- Create a new part
 forceFieldPart.Size = Vector3.new(10, 1, 10) -- Set the size of the part (10x1x10)
@@ -4128,7 +4128,7 @@ local Old = os.time()
 do
 	Settings_M = Tap.Settings:AddSection("Misc") do
 		Timeing = Settings_M:AddParagraph({        
-			Title = "Timeing Server"
+			Title = "Сервер время"
 		})
 		Toggle(Settings_M, "Auto Loading Configs", "", "AutoLoadingConfigs", function(v)
 			writefile(tostring(LocalPlayer.UserId).."ALC.txt", tostring(v))
