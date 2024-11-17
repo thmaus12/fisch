@@ -3972,197 +3972,210 @@ WebHookConfigsData = Tap.Configs:AddSection('Data Sending') do
 	Toggle(WebHookConfigsData, "Halloween Success","","Halloween Success")
 end
 
-Teleporting = Tap.Teleport:AddSection('Teleport') do
-	-- Teleporting button for "Sunstone Island"
-Teleporting:AddButton({
-    Title = "Остров Санстоун",
-    Callback = function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-913.630615234375, 137.29348754882812, -1129.8995361328125)
-    end
-})
+Teleporting = Tap.Teleport:AddSection('Телепортация') do
+    -- Кнопка для телепортации на "Остров Санстоун"
+    Teleporting:AddButton({
+        Title = "Остров Санстоун",
+        Callback = function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-913.630615234375, 137.29348754882812, -1129.8995361328125)
+        end
+    })
 
--- Teleporting button for "Рослит Бэй"
-Teleporting:AddButton({
-    Title = "Roslit Bay",
-    Callback = function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1501.675537109375, 133, 416.2070007324219)
-    end
-})
+    -- Кнопка для телепортации на "Рослит Бэй"
+    Teleporting:AddButton({
+        Title = "Рослит Бэй",
+        Callback = function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1501.675537109375, 133, 416.2070007324219)
+        end
+    })
 
--- Teleporting button for "Случайные острова"
-Teleporting:AddButton({
-    Title = "Случайные острова",
-    Callback = function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(237.6944580078125, 139.34976196289062, 43.103424072265625)
-    end
-})
+    -- Кнопка для телепортации на "Случайные острова"
+    Teleporting:AddButton({
+        Title = "Случайные острова",
+        Callback = function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(237.6944580078125, 139.34976196289062, 43.103424072265625)
+        end
+    })
 
--- Teleporting button for "Мусвуд"
-Teleporting:AddButton({
-    Title = "Мусвуд",
-    Callback = function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(433.7972106933594, 147.07003784179688, 261.80218505859375)
-    end
-})
+    -- Кнопка для телепортации на "Мусвуд"
+    Teleporting:AddButton({
+        Title = "Мусвуд",
+        Callback = function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(433.7972106933594, 147.07003784179688, 261.80218505859375)
+        end
+    })
 
--- Teleporting button for "Исполнительный штаб"
-Teleporting:AddButton({
-    Title = "Исполнительный штаб",
-    Callback = function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-36.46199035644531, -246.55001831054688, 205.77120971679688)
-    end
-})
+    -- Кнопка для телепортации на "Исполнительный штаб"
+    Teleporting:AddButton({
+        Title = "Исполнительный штаб",
+        Callback = function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-36.46199035644531, -246.55001831054688, 205.77120971679688)
+        end
+    })
 
--- Teleporting button for "Зачарование комната"
-Teleporting:AddButton({
-    Title = "Зачарование комната",
-    Callback = function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1310.048095703125, -805.292236328125, -162.34507751464844)
-    end
-})
+    -- Кнопка для телепортации на "Зачарование комната"
+    Teleporting:AddButton({
+        Title = "Зачарование комната",
+        Callback = function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1310.048095703125, -805.292236328125, -162.34507751464844)
+        end
+    })
 
--- Teleporting button for "Статуя Суверенитета"
-Teleporting:AddButton({
-    Title = "Статуя Суверенитета",
-    Callback = function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(22.098665237426758, 159.01470947265625, -1039.8543701171875)
-    end
-})
+    -- Кнопка для телепортации на "Статуя Суверенитета"
+    Teleporting:AddButton({
+        Title = "Статуя Суверенитета",
+        Callback = function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(22.098665237426758, 159.01470947265625, -1039.8543701171875)
+        end
+    })
 
--- Teleporting button for "Мушгроувское болото"
-Teleporting:AddButton({
-    Title = "Мушгроувское болото",
-    Callback = function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2442.805908203125, 130.904052734375, -686.1648559570312)
-    end
-})
+    -- Кнопка для телепортации на "Мушгроувское болото"
+    Teleporting:AddButton({
+        Title = "Мушгроувское болото",
+        Callback = function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2442.805908203125, 130.904052734375, -686.1648559570312)
+        end
+    })
 
--- Teleporting button for "Снежный остров"
-Teleporting:AddButton({
-    Title = "Снежный остров",
-    Callback = function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2589.534912109375, 134.9249267578125, 2333.099365234375)
-    end
-})
+    -- Кнопка для телепортации на "Снежный остров"
+    Teleporting:AddButton({
+        Title = "Снежный остров",
+        Callback = function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2589.534912109375, 134.9249267578125, 2333.099365234375)
+        end
+    })
 
--- Teleporting button for "Terrapin Island"
-Teleporting:AddButton({
-    Title = "Terrapin Island",
-    Callback = function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(152.3716278076172, 154.91015625, 2000.9171142578125)
-    end
-})
+    -- Кнопка для телепортации на "Остров Террапинов"
+    Teleporting:AddButton({
+        Title = "Остров Террапинов",
+        Callback = function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(152.3716278076172, 154.91015625, 2000.9171142578125)
+        end
+    })
 
--- Teleporting button for "Terrapin Island"
-Teleporting:AddButton({
-    Title = "Enchant Relic",
-    Callback = function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1309.2784423828125, -802.427001953125, -83.36397552490234)
-    end
-})
+    -- Кнопка для телепортации на "Зачарованный Реликт"
+    Teleporting:AddButton({
+        Title = "Зачарованный Реликт",
+        Callback = function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1309.2784423828125, -802.427001953125, -83.36397552490234)
+        end
+    })
+end
 
--- Teleporting button for "Terrapin Island"
+-- Кнопка для телепортации на "Остров Террапинов"
 Teleporting:AddButton({
-    Title = "Best Spot",
-    Callback = function()
-    local forceFieldPart = Instance.new("Part") -- Create a new part
-forceFieldPart.Size = Vector3.new(10, 1, 10) -- Set the size of the part (10x1x10)
-forceFieldPart.Position = Vector3.new(1447.8507080078125, 131.49998474121094, -7649.64501953125) -- Adjusted position (2 units lower)
-forceFieldPart.Anchored = true -- Make sure the part does not fall
-forceFieldPart.BrickColor = BrickColor.new("White") -- Set the color of the part to white
-forceFieldPart.Material = Enum.Material.SmoothPlastic -- Set the material of the part
-forceFieldPart.Parent = game.Workspace -- Parent the part to the Workspace
+    Title = "Лучшее Место",  -- Заголовок кнопки
+    Callback = function()  -- Функция, которая выполняется при нажатии кнопки
+        local forceFieldPart = Instance.new("Part")  -- Создаём новый объект "Part"
+        forceFieldPart.Size = Vector3.new(10, 1, 10)  -- Задаём размер (10x1x10)
+        forceFieldPart.Position = Vector3.new(1447.8507080078125, 131.49998474121094, -7649.64501953125)  -- Устанавливаем позицию
+        forceFieldPart.Anchored = true  -- Закрепляем объект, чтобы он не падал
+        forceFieldPart.BrickColor = BrickColor.new("White")  -- Устанавливаем белый цвет
+        forceFieldPart.Material = Enum.Material.SmoothPlastic  -- Устанавливаем материал
+        forceFieldPart.Parent = game.Workspace  -- Размещаем объект в Workspace
 
--- Create a ForceField
-local forceField = Instance.new("ForceField") -- Create a new ForceField object
-forceField.Parent = forceFieldPart -- Parent the ForceField to the part
-wait()
+        -- Создаём ForceField (щит)
+        local forceField = Instance.new("ForceField")  -- Создаём ForceField
+        forceField.Parent = forceFieldPart  -- Размещаем ForceField на объекте
+        wait()  -- Пауза
+        -- Телепортируем игрока на заданные координаты
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1447.8507080078125, 133.49998474121094, -7649.64501953125)
     end
 })
-end
 
-
+-- Функция для отправки данных на вебхук
 function sendwebhook(url, data)
-	local HttpService = game:GetService("HttpService")
-	local success, newdata = pcall(function()
-		return HttpService:JSONEncode(data)
-	end)
-	if not success then
-		print("Error encoding data to JSON:", newdata)
-		return
-	end
-	local headers = {
-		["Content-Type"] = "application/json"
-	}
-	local success, response = pcall(function()
-		return request({
-			Url = url,
-			Body = newdata,
-			Method = "POST",
-			Headers = headers
-		})
-	end)
-	return success
+    local HttpService = game:GetService("HttpService")
+    local success, newdata = pcall(function()
+        return HttpService:JSONEncode(data)  -- Преобразуем данные в формат JSON
+    end)
+    if not success then
+        print("Ошибка кодирования данных в JSON:", newdata)
+        return
+    end
+    local headers = {
+        ["Content-Type"] = "application/json"  -- Устанавливаем тип контента как JSON
+    }
+    -- Отправляем POST-запрос
+    local success, response = pcall(function()
+        return request({
+            Url = url,
+            Body = newdata,
+            Method = "POST",
+            Headers = headers
+        })
+    end)
+    return success  -- Возвращаем результат
 end
 
+-- Отключение AFK-системы и автоматическое движение
 local Old = os.time()
-	task.spawn(function(InitializeService)
-		warn("ANTI AFK STARTING")
-		pcall(function()
-			for i,v in pairs(getconnections(Client.Idled)) do
-				v:Disable() 
-			end
-			Client.Idled:connect(function()
-				game:GetService("VirtualUser"):Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
-				wait(1)
-				game:GetService("VirtualUser"):Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
-			end)
-			while wait(300) do
-				game:GetService("VirtualUser"):Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
-				wait(1)
-				game:GetService("VirtualUser"):Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
-			end
-		end)
-	end)
+task.spawn(function()
+    warn("ANTI AFK СИСТЕМА ЗАПУЩЕНА")
+    pcall(function()
+        -- Отключаем все соединения с событием Idled
+        for i,v in pairs(getconnections(Client.Idled)) do
+            v:Disable() 
+        end
+        -- Когда игрок не активен, симулируем нажатие правой кнопки мыши
+        Client.Idled:connect(function()
+            game:GetService("VirtualUser"):Button2Down(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
+            wait(1)
+            game:GetService("VirtualUser"):Button2Up(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
+        end)
+        -- Каждый 5 минут имитируем нажатие правой кнопки для предотвращения AFK
+        while wait(300) do
+            game:GetService("VirtualUser"):Button2Down(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
+            wait(1)
+            game:GetService("VirtualUser"):Button2Up(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
+        end
+    end)
+end)
+
+-- Создание секции настроек
 do
-	Settings_M = Tap.Settings:AddSection("Misc") do
-		Timeing = Settings_M:AddParagraph({        
-			Title = "Timeing Server"
-		})
-		Toggle(Settings_M, "Auto Loading Configs", "", "AutoLoadingConfigs", function(v)
-			writefile(tostring(LocalPlayer.UserId).."ALC.txt", tostring(v))
-		end)
-		Settings_M:AddButton({
-			Title = "Join Normal Hub Discord",
-			Description = "Click to join",
-			Callback = function()
+    Settings_M = Tap.Settings:AddSection("Разное") do
+        Timeing = Settings_M:AddParagraph({        
+            Title = "Время на сервере"
+        })
+        -- Включение/выключение автоматической загрузки конфигов
+        Toggle(Settings_M, "Автозагрузка конфигов", "", "AutoLoadingConfigs", function(v)
+            writefile(tostring(LocalPlayer.UserId).."ALC.txt", tostring(v))
+        end)
+        -- Кнопка для перехода в Discord
+        Settings_M:AddButton({
+            Title = "Присоединиться к Discord Normal Hub",
+            Description = "Нажмите, чтобы присоединиться",
+            Callback = function()
+                -- Код для перехода в Discord (нужно добавить ссылку)
+            end,
+        })
+    end
 
-			end,
-		})
-	end
+    -- Обновление времени на сервере
+    RunService.Heartbeat:Connect(function()
+        local TimeSinceLastPlay = os.time() - Old
+        local hours = tostring(math.floor(TimeSinceLastPlay / 3600))
+        local minutes = tostring(math.floor((TimeSinceLastPlay % 3600) / 60))
+        local seconds = tostring(TimeSinceLastPlay % 60)
+        Timeing:SetTitle("Вы на сервере: " .. hours .. " ч " .. minutes .. " мин " .. seconds .. " сек")
+    end)
+end
 
-	RunService.Heartbeat:Connect(function() -- All RunService
-		local TimeSinceLastPlay = os.time() - Old
-		local hours = tostring(math.floor(TimeSinceLastPlay / 3600))
-		local minutes = tostring(math.floor((TimeSinceLastPlay % 3600) / 60))
-		local seconds = tostring(TimeSinceLastPlay % 60)
-		Timeing:SetTitle("Server Joined "..hours.." H "..minutes.." M "..seconds.." S ")
-	end)
-
-
-	InterfaceManager:SetLibrary(Fluent)
-	InterfaceManager:SetFolder("Normal Hub")
-	InterfaceManager:BuildInterfaceSection(Tap.Settings)
-	Window:SelectTab(1)
-	SaveManager:LoadAutoloadConfig()
-	Fluent:SetTheme("Amethyst")
-	setfflag("TaskSchedulerTargetFps", "1000")
+-- Инициализация интерфейса
+InterfaceManager:SetLibrary(Fluent)
+InterfaceManager:SetFolder("Normal Hub")
+InterfaceManager:BuildInterfaceSection(Tap.Settings)
+Window:SelectTab(1)
+SaveManager:LoadAutoloadConfig()
+Fluent:SetTheme("Amethyst")
+setfflag("TaskSchedulerTargetFps", "1000")
 setfpscap(120)
+
+-- Установка FPS ограничения
 while true do
     if (game:GetService("Workspace").DistributedGameTime % 1 * 60) > 30 then
         setfpscap(120)
     end
     wait(0)
-end
 end
