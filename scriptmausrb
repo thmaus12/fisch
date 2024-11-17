@@ -1,188 +1,200 @@
+-- Загрузка библиотек Fluent и других необходимых модулей
 local Fluent = loadstring(game:HttpGet("https://raw.githubusercontent.com/Knuxy92/Ui-linoria/main/Fluent/Fluent.lua"))()
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
+-- Создание окна интерфейса
 local Window = Fluent:CreateWindow({
-	Title = "SCRIPTMAUSRB",
-	SubTitle = "ЛУЧШИЙ ПРИВАТНЫЙ СКРИПТ",
-	TabWidth = 120,
-	Size = UDim2.fromOffset(550, 350),
-	Acrylic = false, 
-	Theme = "Amethyst",
-	MinimizeKey = Enum.KeyCode.LeftControl
+    Title = "SCRIPTMAUSRB", -- Заголовок окна
+    SubTitle = "ЛУЧШИЙ ПРИВАТНЫЙ СКРИПТ", -- Подзаголовок
+    TabWidth = 120,  -- Ширина вкладки
+    Size = UDim2.fromOffset(550, 350), -- Размер окна
+    Acrylic = false,  -- Отключение акрилового эффекта
+    Theme = "Amethyst",  -- Тема интерфейса
+    MinimizeKey = Enum.KeyCode.LeftControl  -- Горячая клавиша для минимизации
 })
 
 do 
-	Config = {
+    Config = {}  -- Конфигурации
+    _G.Config = Config  -- Глобальная конфигурация
+    AllFuncs = {}  -- Все функции
+    Threads = getgenv().Threads  -- Потоки
+    Players = game.Players  -- Ссылка на сервис игроков
+    LocalPlayer = game.Players.LocalPlayer  -- Локальный игрок
+    Client = game.Players.LocalPlayer  -- Клиент (тот же игрок)
 
-	}
-	_G.Config = Config
-	AllFuncs = {}
-	Threads = getgenv().Threads
-	Players = game.Players
-	LocalPlayer = game.Players.LocalPlayer
-	Client = game.Players.LocalPlayer
+    -- \\ Модули и сервисы // --
 
+    ReplicatedStorage = game:GetService('ReplicatedStorage')  -- Сервис ReplicatedStorage
+    RunService = game:GetService("RunService")  -- Сервис RunService
+    VirtualInputManager = game:GetService('VirtualInputManager')  -- Сервис VirtualInputManager
+    CollectionService = game:GetService("CollectionService")  -- Сервис CollectionService
+    CoreGui = game:GetService("CoreGui")  -- Сервис CoreGui
+    HttpService = game:GetService("HttpService")  -- Сервис HttpService
+    TeleportService = game:GetService("TeleportService")  -- Сервис TeleportService
+    VirtualUser = game:GetService("VirtualUser")  -- Сервис VirtualUser
+    UserInputService = game:GetService("UserInputService")  -- Сервис UserInputService
 
-	-- \\ Module GetService // --
+    -- \\ Нормальные модули // --
+    
+    PlayerGui = LocalPlayer.PlayerGui  -- Игровой интерфейс игрока
+    Backpack = LocalPlayer.Backpack  -- Рюкзак игрока
+    request = (syn and syn.request) or (http and http.request) or http_request or (fluxus and fluxus.request) or request  -- Запросы (для разных платформ)
 
-	ReplicatedStorage = game:GetService('ReplicatedStorage')
-	RunService = game:GetService("RunService")
-	VirtualInputManager = game:GetService('VirtualInputManager')
-	CollectionService = game:GetService("CollectionService")
-	CoreGui = game:GetService("CoreGui")
-	HttpService = game:GetService("HttpService")
-	TeleportService = game:GetService("TeleportService")
-	VirtualUser = game:GetService("VirtualUser")
-	VirtualInputManager = game:GetService("VirtualInputManager")
-	UserInputService = game:GetService("UserInputService")
+    Char = Client.Character  -- Персонаж игрока
+    Character = Client.Character  -- Тот же персонаж
+    if not Threads then getgenv().Threads = {} end  -- Если нет потоков, создаём их
 
-
-	-- \\ Normal Module // --
-	
-	PlayerGui = LocalPlayer.PlayerGui
-	Backpack = LocalPlayer.Backpack
-	request = (syn and syn.request) or (http and http.request) or http_request or (fluxus and fluxus.request) or request
-
-	Char = Client.Character
-	Character = Client.Character
-	if not Threads then getgenv().Threads = {} end
-
-	repeat 
-		LocalPlayer = Players.LocalPlayer
-		wait()
-	until LocalPlayer
+    -- Ждём, пока локальный игрок будет доступен
+    repeat 
+        LocalPlayer = Players.LocalPlayer
+        wait()
+    until LocalPlayer
 end
 
-function Notify(Des, Time, title)
-	Fluent:Notify({
-		Title= title or "Normal Hub Notify",
-		Content = Des,
-		Duration = Time or 3
-	})
+-- Функция уведомления
+function Notify(Описание, Время, Заголовок)
+    Fluent:Notify({
+        Title = Заголовок or "Уведомление Normal Hub",  -- Заголовок уведомления
+        Content = Описание,  -- Описание уведомления
+        Duration = Время or 3  -- Длительность уведомления (по умолчанию 3 секунды)
+    })
 end
 
+-- Настройки для "Normal Hub Table" (Таблица настроек)
 _G['Normal Hub Table'] = {
-	isWindows = UserInputService:GetPlatform() == Enum.Platform.Windows,
-	TypeOs = (table.find({Enum.Platform.Windows}, game:GetService('UserInputService'):GetPlatform()) ~= nil and 'Pc') or 'Mb',
-	SizeUi = (not isWindows and UDim2.fromOffset(600,300)) or UDim2.fromOffset(560,600),
-	AutoSize = true,
-	TweenUiSize = true,
-	SpeedTweenUi = 0.25,
-	StyleTweenUi = Enum.EasingStyle.Quad,
-	Mutiply = 1.80,
-	SizeX = 550,
-	SafePercent = 20,
-
-	AnimationUiToggle = true,
+    isWindows = UserInputService:GetPlatform() == Enum.Platform.Windows,  -- Проверка, Windows ли у пользователя
+    TypeOs = (table.find({Enum.Platform.Windows}, game:GetService('UserInputService'):GetPlatform()) ~= nil and 'Pc') or 'Mb',  -- Тип устройства (ПК или мобильное)
+    SizeUi = (not isWindows and UDim2.fromOffset(600, 300)) or UDim2.fromOffset(560, 600),  -- Размер интерфейса в зависимости от устройства
+    AutoSize = true,  -- Автоматический размер
+    TweenUiSize = true,  -- Анимация изменения размера UI
+    SpeedTweenUi = 0.25,  -- Скорость анимации изменения размера
+    StyleTweenUi = Enum.EasingStyle.Quad,  -- Стиль анимации изменения размера
+    Mutiply = 1.80,  -- Коэффициент масштабирования
+    SizeX = 550,  -- Размер по оси X
+    SafePercent = 20,  -- Безопасный процент (например, для изменения размера)
+    AnimationUiToggle = true,  -- Включение анимации интерфейса
 }
 
-_G['Normal Hub Table'].SizeUi = (not _G['Normal Hub Table'].isWindows and UDim2.fromOffset(600,300)) or UDim2.fromOffset(560,600)
+_G['Normal Hub Table'].SizeUi = (not _G['Normal Hub Table'].isWindows and UDim2.fromOffset(600, 300)) or UDim2.fromOffset(560, 600)
 if not _G['Normal Hub Table'].isWindows then
-	if game.CoreGui:FindFirstChild('UIBUTTON') then
-		game.CoreGui:FindFirstChild('UIBUTTON'):Destroy()
-	end
+    -- Удаление старой кнопки UI, если она существует
+    if game.CoreGui:FindFirstChild('UIBUTTON') then
+        game.CoreGui:FindFirstChild('UIBUTTON'):Destroy()
+    end
 
-	local TweenService = game:GetService("TweenService")
-	local UserInputService = game:GetService("UserInputService")
-	local UIBUTTON = Instance.new("ScreenGui")
-	local Frame = Instance.new("Frame")
-	local ImageButton = Instance.new("ImageButton")
-	local UICorner = Instance.new("UICorner")
-	local UICorner_2 = Instance.new("UICorner")
+    -- Получаем нужные сервисы
+    local TweenService = game:GetService("TweenService")
+    local UserInputService = game:GetService("UserInputService")
+    
+    -- Создаём интерфейсные элементы
+    local UIBUTTON = Instance.new("ScreenGui")
+    local Frame = Instance.new("Frame")
+    local ImageButton = Instance.new("ImageButton")
+    local UICorner = Instance.new("UICorner")
+    local UICorner_2 = Instance.new("UICorner")
 
-	UIBUTTON.Name = "UIBUTTON"
-	UIBUTTON.Parent = game.CoreGui
-	UIBUTTON.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+    -- Настройки для кнопки UIBUTTON
+    UIBUTTON.Name = "UIBUTTON"
+    UIBUTTON.Parent = game.CoreGui
+    UIBUTTON.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
-	Frame.Parent = UIBUTTON
-	Frame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
-	Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	Frame.BorderSizePixel = 0
-	Frame.Transparency = 1
-	Frame.Position = UDim2.new(0.157012194, 0, 0.164366379, 0)
-	Frame.Size = UDim2.new(0, 115, 0, 49)
+    -- Настройки для фрейма
+    Frame.Parent = UIBUTTON
+    Frame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+    Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    Frame.BorderSizePixel = 0
+    Frame.Transparency = 1
+    Frame.Position = UDim2.new(0.157012194, 0, 0.164366379, 0)
+    Frame.Size = UDim2.new(0, 115, 0, 49)
 
-ImageButton.Parent = Frame
-ImageButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-ImageButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
-ImageButton.BorderSizePixel = 0
-ImageButton.Active = true
-ImageButton.Draggable = true
-ImageButton.Position = UDim2.new(0.218742043, 0, -0.155235752, 0)
-ImageButton.Size = UDim2.new(0, 64, 0, 64)
+    -- Настройки для кнопки изображения
+    ImageButton.Parent = Frame
+    ImageButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    ImageButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    ImageButton.BorderSizePixel = 0
+    ImageButton.Active = true
+    ImageButton.Draggable = true
+    ImageButton.Position = UDim2.new(0.218742043, 0, -0.155235752, 0)
+    ImageButton.Size = UDim2.new(0, 64, 0, 64)
 
--- Set initial image to "open"
-ImageButton.Image = "rbxassetid://136634905225382" -- Open image asset ID
-local isOpen = true -- Variable to track the state
+    -- Устанавливаем начальное изображение (кнопка "открыть")
+    ImageButton.Image = "rbxassetid://136634905225382"  -- ID изображения "открыть"
+    local isOpen = true  -- Переменная для отслеживания состояния (открыто/закрыто)
 
-ImageButton.MouseButton1Click:Connect(function()
-    -- Animate the button size
-    ImageButton:TweenSize(UDim2.new(0, 60, 0, 60), Enum.EasingDirection.In, Enum.EasingStyle.Elastic, 0.1)
-    delay(0.1, function()
-        ImageButton:TweenSize(UDim2.new(0, 64, 0, 64), Enum.EasingDirection.Out, Enum.EasingStyle.Elastic, 0.1)
+    -- Событие для клика по кнопке
+    ImageButton.MouseButton1Click:Connect(function()
+        -- Анимация изменения размера кнопки
+        ImageButton:TweenSize(UDim2.new(0, 60, 0, 60), Enum.EasingDirection.In, Enum.EasingStyle.Elastic, 0.1)
+        delay(0.1, function()
+            ImageButton:TweenSize(UDim2.new(0, 64, 0, 64), Enum.EasingDirection.Out, Enum.EasingStyle.Elastic, 0.1)
+        end)
+
+        -- Переключение изображения в зависимости от состояния
+        if isOpen then
+            ImageButton.Image = "rbxassetid://134717468347051"  -- ID изображения "закрыть"
+        else
+            ImageButton.Image = "rbxassetid://136634905225382"  -- ID изображения "открыть"
+        end
+        isOpen = not isOpen  -- Переключаем состояние
+
+        -- Симуляция нажатия клавиш
+        local VirtualInputManager = game:GetService("VirtualInputManager")
+        VirtualInputManager:SendKeyEvent(true, "RightControl", false, game)
+        VirtualInputManager:SendKeyEvent(false, "RightControl", false, game)
+        VirtualInputManager:SendKeyEvent(true, "LeftControl", false, game)
+        VirtualInputManager:SendKeyEvent(false, "LeftControl", false, game)
     end)
 
-    -- Toggle the image based on the state
-    if isOpen then
-        ImageButton.Image = "rbxassetid://134717468347051" -- Replace with close image asset ID
-    else
-        ImageButton.Image = "rbxassetid://136634905225382" -- Open image asset ID
+    -- Добавляем закругления углов для кнопки
+    UICorner.CornerRadius = UDim.new(0, 100)
+    UICorner.Parent = ImageButton
+
+    -- Добавляем закругления углов для фрейма
+    UICorner_2.CornerRadius = UDim.new(0, 10)
+    UICorner_2.Parent = Frame
+
+    -- Создаём переменные для перетаскивания окна
+    local UIS = game:GetService('UserInputService')
+    local frame = Frame
+    local dragToggle = nil
+    local dragSpeed = 0.25
+    local dragStart = nil
+    local startPos = nil
+
+    -- Функция для обновления позиции окна
+    local function updateInput(input)
+        local delta = input.Position - dragStart
+        local position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X,
+            startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+        game:GetService('TweenService'):Create(frame, TweenInfo.new(dragSpeed), {Position = position}):Play()
     end
-    isOpen = not isOpen -- Toggle the state
 
-    -- Simulate key presses
-    local VirtualInputManager = game:GetService("VirtualInputManager")
-    VirtualInputManager:SendKeyEvent(true,"RightControl",false,game)
-    VirtualInputManager:SendKeyEvent(false,"RightControl",false,game)
-    VirtualInputManager:SendKeyEvent(true,"LeftControl",false,game)
-    VirtualInputManager:SendKeyEvent(false,"LeftControl",false,game)
-end)
+    -- Обработка начала перетаскивания
+    frame.InputBegan:Connect(function(input)
+        if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then 
+            dragToggle = true
+            dragStart = input.Position
+            startPos = frame.Position
+            input.Changed:Connect(function()
+                if input.UserInputState == Enum.UserInputState.End then
+                    dragToggle = false
+                end
+            end)
+        end
+    end)
 
-UICorner.CornerRadius = UDim.new(0, 100)
-UICorner.Parent = ImageButton
-
-	UICorner_2.CornerRadius = UDim.new(0, 10)
-	UICorner_2.Parent = Frame
-
-
-	local UIS = game:GetService('UserInputService')
-	local frame = Frame
-	local dragToggle = nil
-	local dragSpeed = 0.25
-	local dragStart = nil
-	local startPos = nil
-
-	local function updateInput(input)
-		local delta = input.Position - dragStart
-		local position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X,
-			startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-		game:GetService('TweenService'):Create(frame, TweenInfo.new(dragSpeed), {Position = position}):Play()
-	end
-
-	frame.InputBegan:Connect(function(input)
-		if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then 
-			dragToggle = true
-			dragStart = input.Position
-			startPos = frame.Position
-			input.Changed:Connect(function()
-				if input.UserInputState == Enum.UserInputState.End then
-					dragToggle = false
-				end
-			end)
-		end
-	end)
-
-	UIS.InputChanged:Connect(function(input)
-		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-			if dragToggle then
-				Frame.Transparency = 1
-				updateInput(input)
-			else
-				Frame.Transparency = 1
-			end
-		end
-	end)
+    -- Обработка перемещения мыши (или сенсорного ввода)
+    UIS.InputChanged:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+            if dragToggle then
+                Frame.Transparency = 1
+                updateInput(input)
+            else
+                Frame.Transparency = 1
+            end
+        end
+    end)
 end
 
 do -- Settings Initializer
