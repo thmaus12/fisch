@@ -3061,216 +3061,238 @@ do -- INFO FISH
 end
 
 local Tap = {
-	General = Window:AddTab({Title = "Generals", Icon = "box"}),
-	Event = Window:AddTab({Title = "Event", Icon = "star"}),
-	Player = Window:AddTab({ Title = "Player", Icon = "user"}),
-	Shop = Window:AddTab({ Title = "Shopee", Icon = "shopping-bag"}),
-	Configs = Window:AddTab({Title = "Configs", Icon = "diamond"}),
-	Teleport = Window:AddTab({Title = "Teleport", Icon = "asterisk"}),
-	Settings = Window:AddTab({Title = "Settings", Icon = "settings"})
+	General = Window:AddTab({Title = "Основные", Icon = "box"}),  -- Основной раздел
+	Event = Window:AddTab({Title = "Событие", Icon = "star"}),  -- Раздел с событиями
+	Player = Window:AddTab({ Title = "Игрок", Icon = "user"}),  -- Раздел с настройками игрока
+	Shop = Window:AddTab({ Title = "Магазин", Icon = "shopping-bag"}),  -- Магазин
+	Configs = Window:AddTab({Title = "Настройки", Icon = "diamond"}),  -- Конфигурации
+	Teleport = Window:AddTab({Title = "Телепортация", Icon = "asterisk"}),  -- Телепортация
+	Settings = Window:AddTab({Title = "Настройки", Icon = "settings"})  -- Раздел настроек
 }
 
+-- Функция для создания переключателя
 Toggle = function(Section, NameIndex, Description, ConfigName, Function, ...)
-	local Misc = {...}
-	ConfigName = ConfigName or NameIndex
-	local defaultState = Config[ConfigName] or false
+	local Misc = {...}  -- Дополнительные параметры
+	ConfigName = ConfigName or NameIndex  -- Имя конфигурации
+	local defaultState = Config[ConfigName] or false  -- Состояние по умолчанию
 
+	-- Создание переключателя
 	local CreateToggle = Section:AddToggle((NameIndex or NameIndex.."-toggle"), {
-		Title = NameIndex or "null",
-		Default = defaultState,
-		Description = Description or "",
+		Title = NameIndex or "null",  -- Название
+		Default = defaultState,  -- Состояние по умолчанию
+		Description = Description or "",  -- Описание
 	})
 
+	-- Обработчик изменения состояния переключателя
 	CreateToggle:OnChanged(function(v)
-		Config[ConfigName] = v
-		save()
+		Config[ConfigName] = v  -- Обновляем значение в конфигурации
+		save()  -- Сохраняем конфигурацию
 		if Function then
-			Function(v)
+			Function(v)  -- Если передана функция, вызываем её
 		else
 			if AllFuncs[ConfigName] then
+				-- Если для этой конфигурации есть функция, выполняем её
 				local threadRunning = task.spawn(AllFuncs[ConfigName])
 
 				if not v and threadRunning then
-					task.cancel(threadRunning)
+					task.cancel(threadRunning)  -- Если переключатель выключен, отменяем выполнение
 				end
 			end
 		end
 	end)
 
-	return CreateToggle
+	return CreateToggle  -- Возвращаем созданный переключатель
 end
 
-Slider = function(section,Name,min,max,Rounding,...)
-	local SettingName,func = ...
-	if not func and type(SettingName) == "function" then func = SettingName end
-	if not SettingName then SettingName = Name end
-	local default = Config[SettingName]
+-- Функция для создания слайдера
+Slider = function(section, Name, min, max, Rounding, ...)
+	local SettingName, func = ...
+	if not func and type(SettingName) == "function" then func = SettingName end  -- Проверяем, не является ли SettingName функцией
+	if not SettingName then SettingName = Name end  -- Если имя не задано, берём имя из параметра Name
+	local default = Config[SettingName]  -- Значение по умолчанию из конфигурации
+
+	-- Создание слайдера
 	local CreateSlider = section:AddSlider((Name or Name.."-slider"), {
-		Title =Name or "null",
-		Min = min or 0,
-		Max = max or 1,
-		Default = (Config[SettingName] or default) or min,
-		Rounding = (Rounding == true and 1) or 0,
+		Title = Name or "null",  -- Название слайдера
+		Min = min or 0,  -- Минимальное значение
+		Max = max or 1,  -- Максимальное значение
+		Default = (Config[SettingName] or default) or min,  -- Значение по умолчанию
+		Rounding = (Rounding == true and 1) or 0,  -- Округление
 	})
 
+	-- Обработчик изменения значения слайдера
 	CreateSlider:OnChanged(function(v)
-		save()
-		Config[SettingName] = v
+		save()  -- Сохраняем конфигурацию
+		Config[SettingName] = v  -- Обновляем значение в конфигурации
 	end)
-	task.wait()
-	return CreateSlider
+	task.wait()  -- Ожидаем завершения операции
+	return CreateSlider  -- Возвращаем созданный слайдер
 end
 
-TextBox = function(section,Name,tooltip,PlaceHolder,Numberic,...)
-	local SettingName,func = ...
-	if not func and type(SettingName) == "function" then func = SettingName end
-	if not SettingName then SettingName = Name end
-	local CreateInput =section:AddInput((Name or Name.."-input"), {
-		Title =Name or "Null",
-		Placeholder = PlaceHolder or "Put text here!",
-		Numeric = Numberic or false,
-		Finished = true,
-		Description = tooltip or "",
-		Default = Config[SettingName],
+-- Функция для создания текстового поля
+TextBox = function(section, Name, tooltip, PlaceHolder, Numeric, ...)
+	local SettingName, func = ...
+	if not func and type(SettingName) == "function" then func = SettingName end  -- Проверяем, не является ли SettingName функцией
+	if not SettingName then SettingName = Name end  -- Если имя не задано, берём имя из параметра Name
+
+	-- Создание текстового поля
+	local CreateInput = section:AddInput((Name or Name.."-input"), {
+		Title = Name or "Null",  -- Название
+		Placeholder = PlaceHolder or "Введите текст здесь!",  -- Текст в поле ввода
+		Numeric = Numeric or false,  -- Если true, поле для чисел
+		Finished = true,  -- Завершающий символ
+		Description = tooltip or "",  -- Описание
+		Default = Config[SettingName],  -- Значение по умолчанию из конфигурации
 	})
 
+	-- Обработчик изменения значения в текстовом поле
 	CreateInput:OnChanged(function(value)
-		Config[SettingName] = value
-		save()
+		Config[SettingName] = value  -- Обновляем значение в конфигурации
+		save()  -- Сохраняем конфигурацию
 	end)
-	task.wait()
-	return CreateInput
+	task.wait()  -- Ожидаем завершения операции
+	return CreateInput  -- Возвращаем созданное текстовое поле
 end
 
+-- Функция для создания выпадающего списка
 Dropdown = function(section, Name, default, list, multi, ...)
 	local SettingName, func = ...
 	if not func and type(SettingName) == "function" then func = SettingName end
-	SettingName = SettingName or Name
+	SettingName = SettingName or Name  -- Имя настройки
 
+	-- Если выбран многократный выбор
 	if multi then
 		default = (default or Config[SettingName]) or {}
 		if type(Config[SettingName]) == "string" then
-			Config[SettingName] = {Config[SettingName]}
+			Config[SettingName] = {Config[SettingName]}  -- Преобразуем строку в таблицу
 		end
 	else
-		default = (default or Config[SettingName]) or ""
+		default = (default or Config[SettingName]) or ""  -- Обычный выбор
 	end
 
+	-- Создание выпадающего списка
 	local CreateDropdown = section:AddDropdown((Name or Name.."-dropdown"), {
-		Title = Name or "Null",
-		Values = list or {"None"},
-		Multi = multi or false,
-		Default = default
+		Title = Name or "Null",  -- Название
+		Values = list or {"None"},  -- Список значений
+		Multi = multi or false,  -- Поддержка множественного выбора
+		Default = default  -- Значение по умолчанию
 	})
 
+	-- Обработчик изменения значения в выпадающем списке
 	CreateDropdown:OnChanged(function(v)
 		if multi and type(v) == 'table' then
-			Config[SettingName] = {}
+			Config[SettingName] = {}  -- Если это таблица (множественный выбор)
 			for _, selectedValue in pairs(v) do
-				table.insert(Config[SettingName], selectedValue)
+				table.insert(Config[SettingName], selectedValue)  -- Добавляем все выбранные значения
 			end
 		else
-			Config[SettingName] = v
+			Config[SettingName] = v  -- Обычное изменение значения
 		end
-		save()
+		save()  -- Сохраняем изменения
 		if func then
-			func(v)
+			func(v)  -- Если передана функция, вызываем её
 		end
 	end)
 
-	return CreateDropdown
+	return CreateDropdown  -- Возвращаем созданный выпадающий список
 end
 
-
+-- Функция для фарма рыбы
 AllFuncs['Farm Fish'] = function()
-	local RodName = ReplicatedStorage.playerstats[LocalPlayer.Name].Stats.rod.Value
+	local RodName = ReplicatedStorage.playerstats[LocalPlayer.Name].Stats.rod.Value  -- Имя удочки
 	while Config['Farm Fish'] and task.wait() do
 		if Backpack:FindFirstChild(RodName) then
-			LocalPlayer.Character.Humanoid:EquipTool(Backpack:FindFirstChild(RodName))
+			LocalPlayer.Character.Humanoid:EquipTool(Backpack:FindFirstChild(RodName))  -- Экипируем удочку
 		end
 		if LocalPlayer.Character:FindFirstChild(RodName) and LocalPlayer.Character:FindFirstChild(RodName):FindFirstChild("bobber") then
+			-- Клонируем объект GPS для отображения
 			local XyzClone = game:GetService("ReplicatedStorage").resources.items.items.GPS.GPS.gpsMain.xyz:Clone()
 			XyzClone.Parent = game.Players.LocalPlayer.PlayerGui:WaitForChild("hud"):WaitForChild("safezone"):WaitForChild("backpack")
 			XyzClone.Name = "Lure"
 			XyzClone.Text = "<font color='#ff4949'>Lure </font>: 0%"
 			repeat
 				pcall(function()
+					-- Шейк UI для ловли рыбы
 					PlayerGui:FindFirstChild("shakeui").safezone:FindFirstChild("button").Size = UDim2.new(1001, 0, 1001, 0)
 					game:GetService("VirtualUser"):Button1Down(Vector2.new(1, 1))
 					game:GetService("VirtualUser"):Button1Up(Vector2.new(1, 1))
 				end)
+				-- Обновляем процент приманки
 				XyzClone.Text = "<font color='#ff4949'>Lure </font>: "..tostring(ExportValue(tostring(LocalPlayer.Character:FindFirstChild(RodName).values.lure.Value), 2)).."%"
 				RunService.Heartbeat:Wait()
 			until not LocalPlayer.Character:FindFirstChild(RodName) or LocalPlayer.Character:FindFirstChild(RodName).values.bite.Value or not Config['Farm Fish']
 			XyzClone.Text = "<font color='#ff4949'>FISHING!</font>"
 			delay(1.5, function()
-				XyzClone:Destroy()
+				XyzClone:Destroy()  -- Уничтожаем клонированный объект после ловли
 			end)
 			repeat
 				ReplicatedStorage.events.reelfinished:FireServer(1000000000000000000000000, true)
 				task.wait(.5)
 			until not LocalPlayer.Character:FindFirstChild(RodName) or not LocalPlayer.Character:FindFirstChild(RodName).values.bite.Value or not Config['Farm Fish']
 		else
-			LocalPlayer.Character:FindFirstChild(RodName).events.cast:FireServer(1000000000000000000000000)
+			LocalPlayer.Character:FindFirstChild(RodName).events.cast:FireServer(1000000000000000000000000)  -- Бросаем удочку
 			task.wait(2)
 		end
 	end
 end
 
-
+-- Функция для продажи рыбы
 AllFuncs['Sell Fish'] = function()
 	while Config['Sell Fish'] and task.wait(3) do
-		game:GetService("ReplicatedStorage"):WaitForChild("events"):WaitForChild("selleverything"):InvokeServer()
+		game:GetService("ReplicatedStorage"):WaitForChild("events"):WaitForChild("selleverything"):InvokeServer()  -- Продаём рыбу
 	end
 end
 
-
+-- Функция для перемещения в выбранную позицию
 AllFuncs['To Pos Stand'] = function()
 	while Config['To Pos Stand'] and task.wait() do
 		if not Config['SelectPositionStand'] then
-			Notify("Pls Select Position")
+			Notify("Пожалуйста, выберите позицию")  -- Уведомление, если позиция не выбрана
 			Config['To Pos Stand'] = false
 			return
 		end
 		pcall(function()
-			LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame = Config['SelectPositionStand']
+			LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame = Config['SelectPositionStand']  -- Перемещаем в выбранную позицию
 		end)
 	end
 end
 
+-- Функция для включения/выключения скорости хождения
 AllFuncs['Toggle Walk Speed'] = function()
 	while Config['Toggle Walk Speed'] and task.wait() do
 		pcall(function()
-			LocalPlayer.Character:FindFirstChild("Humanoid").WalkSpeed = Config['Set Walk Speed']
+			LocalPlayer.Character:FindFirstChild("Humanoid").WalkSpeed = Config['Set Walk Speed']  -- Устанавливаем скорость
 		end)
 	end
 	if not Config['Toggle Walk Speed'] then
 		pcall(function()
-			LocalPlayer.Character:FindFirstChild("Humanoid").WalkSpeed = 16
+			LocalPlayer.Character:FindFirstChild("Humanoid").WalkSpeed = 16  -- Восстанавливаем скорость по умолчанию
 		end)
 	end
 end
 
+-- Функция для включения/выключения силы прыжка
 AllFuncs['Toggle Jump Power'] = function()
 	while Config['Toggle Jump Power'] and task.wait() do
 		pcall(function()
-			LocalPlayer.Character:FindFirstChild("Humanoid").JumpPower = Config['Set Jump Power']
+			LocalPlayer.Character:FindFirstChild("Humanoid").JumpPower = Config['Set Jump Power']  -- Устанавливаем силу прыжка
 		end)
 	end
 	if not Config['Toggle Jump Power'] then
 		pcall(function()
-			LocalPlayer.Character:FindFirstChild("Humanoid").JumpPower = 50
+			LocalPlayer.Character:FindFirstChild("Humanoid").JumpPower = 50  -- Восстанавливаем силу прыжка по умолчанию
 		end)
 	end
 end
 
+-- Функция для включения/выключения режима Ноклип (проходить сквозь объекты)
 AllFuncs['Toggle Noclip'] = function()
 	while Config['Toggle Noclip'] and task.wait() do
 		local charParts = LocalPlayer.Character:GetDescendants()
 		for i,v in pairs(charParts) do
 			if v:IsA("BasePart") and LocalPlayer.Character then
 				if v.CanCollide then
-					v.CanCollide = false
+					v.CanCollide = false  -- Отключаем коллизии
 				end
 			end
 		end
@@ -3279,17 +3301,19 @@ AllFuncs['Toggle Noclip'] = function()
 		local charParts = LocalPlayer.Character:GetDescendants()
 		for i,v in pairs(charParts) do
 			if v:IsA("BasePart") and LocalPlayer.Character then
-				v.CanCollide = true
+				v.CanCollide = true  -- Включаем коллизии
 			end
 		end
 	end
 end
 
+-- Функция для получения аватара игрока
 GetPlayerProfile = function()
 	local Respone = game:HttpGet("https://thumbnails.roblox.com/v1/users/avatar-bust?userIds="..LocalPlayer.UserId.."&size=420x420&format=Png&isCircular=false")
-	return HttpService:JSONDecode(Respone)['data'][1]['imageUrl']
+	return HttpService:JSONDecode(Respone)['data'][1]['imageUrl']  -- Возвращаем URL аватара
 end
 
+-- Функция для форматирования чисел с разделением на тысячи
 comma_value = function(Value)
 	local Calculated = Value
 	while true do
@@ -3300,6 +3324,7 @@ comma_value = function(Value)
 	return Calculated
 end
 
+-- Функция для получения позиции игрока
 function GetPosition()
 	if not game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
 		return {
@@ -3315,73 +3340,86 @@ function GetPosition()
 	}
 end
 
+-- Функция для экспорта значений с округлением до нужного количества знаков после запятой
 function ExportValue(arg1, arg2)
-	return tonumber(string.format("%."..(arg2 or 1)..'f', arg1))
+	return tonumber(string.format("%."..(arg2 or 1)..'f', arg1))  -- Округление и преобразование в число
 end
 
-AllFuncs.HopServer = function(FullServer) -- Hop Server (Low)
-	local FullServer = FullServer or false
+-- Функция для переключения сервера (Hop Server)
+AllFuncs.HopServer = function(FullServer) -- Переключение сервера (Low)
+	local FullServer = FullServer or false  -- Опция для полноценных серверов
 
 	local Http = game:GetService("HttpService")
 	local Api = "https://games.roblox.com/v1/games/"
 
-	local _place = game.PlaceId
-	local _servers = Api.._place.."/servers/Public?sortOrder=Asc&limit=100"
+	local _place = game.PlaceId  -- ID игры
+	local _servers = Api.._place.."/servers/Public?sortOrder=Asc&limit=100"  -- Ссылка на серверы
 	local ListServers = function (cursor)
 		local Raw = game:HttpGet(_servers .. ((cursor and "&cursor="..cursor) or ""))
-		return Http:JSONDecode(Raw)
+		return Http:JSONDecode(Raw)  -- Получение списка серверов
 	end
 
+	-- Поиск доступного сервера
 	local Server, Next; repeat
 		local Servers = ListServers(Next)
 		Server = Servers.data[1]
 		Next = Servers.nextPageCursor
 	until Server
+
+	-- Перемещение на найденный сервер
 	repeat
 		if not FullServer then
-			game:GetService("TeleportService"):TeleportToPlaceInstance(_place,Server.id,game.Players.LocalPlayer)
+			game:GetService("TeleportService"):TeleportToPlaceInstance(_place, Server.id, game.Players.LocalPlayer)  -- Переключение на сервер
 		else
+			-- Получаем сервера, исключая переполненные
 			if request then
 				local servers = {}
-				local req = request(
-					{
-						Url = string.format("https://games.roblox.com/v1/games/%d/servers/Public?sortOrder=Desc&limit=100&excludeFullGames=true", game.PlaceId)
-					}
-				).Body;
+				local req = request({
+					Url = string.format("https://games.roblox.com/v1/games/%d/servers/Public?sortOrder=Desc&limit=100&excludeFullGames=true", game.PlaceId)
+				}).Body;
 				local body = game:GetService("HttpService"):JSONDecode(req)
 				if body and body.data then
 					for i, v in next, body.data do
+						-- Ищем сервера с меньшим числом игроков
 						if type(v) == "table" and tonumber(v.playing) and tonumber(v.maxPlayers) and v.playing < v.maxPlayers and v.id ~= game.JobId then
 							table.insert(servers, 1, v.id)
 						end
 					end
 				end
+				-- Переход на случайный сервер
 				if #servers > 0 then
 					game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, servers[math.random(1, #servers)], game.Players.LocalPlayer)
 				else
-					return "Couldn't find a server."
+					return "Не удалось найти сервер."
 				end
 			end
 		end
 		wait()
-	until game.PlaceId ~= game.PlaceId
+	until game.PlaceId ~= game.PlaceId  -- Проверка на изменение игры
 end
 
+-- Переменная для отслеживания времени последней отправки
 local LastDely = tick()
+
+-- Функция для отправки webhook (уведомлений)
 AllFuncs['Sending Webhook'] = function()
 	while Config['Sending Webhook'] and task.wait() do
 		if tick() - LastDely >= tonumber(Config['Delay Sending']) and (Config['Current Level'] or Config['Current Money']) then
-			LastDely = tick()
+			LastDely = tick()  -- Обновляем время последней отправки
 			local LevelDes = ""
 			local MoneyDes = ""
 			local AllFishInventory = ""
 			local BuySuccess = "**"
+			
+			-- Описание уровня
 			if Config['Current Level'] then
 				LevelDes = "\nNow Level : "..comma_value(LocalPlayer.leaderstats.Level.Value)
 			end
+			-- Описание денег
 			if Config['Current Money'] then
 				MoneyDes = "\nNow Money : "..tostring(LocalPlayer.PlayerGui.hud.safezone.coins.Text)
 			end
+			-- Описание рыбы в инвентаре
 			if Config['All Fish Inventory'] then
 				AllFishInventory = "```"
 				for i,v in pairs(GetFishInInventory()) do
@@ -3396,13 +3434,15 @@ AllFuncs['Sending Webhook'] = function()
 				end
 				AllFishInventory = AllFishInventory.."```"
 			end
+			
+			-- Отправка уведомления через webhook
 			local SendingSuccess = sendwebhook(Config['WebHook Configs'], {
 				["content"] = ((Config['Ping Discord Id'] and Config['"Discord Id'] ~= "") and "<@"..Config['"Discord Id']..">"),
 				["embeds"] = {
 					{
 						["id"]= 661605297,
 						["title"]= "уведомления рыб",
-						["description"] = "** Player : "..LocalPlayer.Name.."\n "..MoneyDes..""..LevelDes..""..AllFishInventory.."**",
+						["description"] = "** Игрок : "..LocalPlayer.Name.."\n "..MoneyDes..""..LevelDes..""..AllFishInventory.."**",
 						["color"]= 8646911,
 						["fields"]= {},
 						["thumbnail"]= {
@@ -3415,15 +3455,18 @@ AllFuncs['Sending Webhook'] = function()
 					}
 				}
 			})
+
+			-- Уведомление об успешной отправке
 			if SendingSuccess then
-				Notify("Sending WebHook Success")
+				Notify("Webhook успешно отправлен")
 			else
-				Notify("Failed Sending WebHook!")
+				Notify("Ошибка при отправке Webhook!")
 			end
 		end
 	end
 end
 
+-- Обработчик события, когда появляется новый объект "Safe Whirlpool"
 workspace.active.ChildAdded:Connect(function(child)
 	if Config['Safe Whirlpool Spawn'] and Config['WebHook Configs'] ~= "" then
 		if child.Name == "Safe Whirlpool" then
@@ -3439,7 +3482,7 @@ workspace.active.ChildAdded:Connect(function(child)
 					{
 						["id"]= 661605297,
 						["title"]= "уведомление о рыб",
-						["description"] = "** Player : "..LocalPlayer.Name.."\n Found Safe Whirlpool\n Position : "..StringInput.."**",
+						["description"] = "** Игрок : "..LocalPlayer.Name.."\n Найдено Safe Whirlpool\n Позиция : "..StringInput.."**",
 						["color"]= 8646911,
 						["fields"]= {},
 						["thumbnail"]= {
@@ -3452,15 +3495,17 @@ workspace.active.ChildAdded:Connect(function(child)
 					}
 				}
 			})
+			-- Уведомление об успешной отправке
 			if SendingSuccess then
-				Notify("Sending WebHook Success")
+				Notify("Webhook успешно отправлен")
 			else
-				Notify("Failed Sending WebHook!")
+				Notify("Ошибка при отправке Webhook!")
 			end
 		end
 	end
 end)
 
+-- Раздел на интерфейсе для выбора позиции и других настроек
 Main = Tap.General:AddSection('General') do
 	SelectPosition = Main:AddParagraph({        
 		Title = "Position : N/A"
@@ -3475,6 +3520,8 @@ Main = Tap.General:AddSection('General') do
 		end
 	})
 end
+
+-- Сбор ингредиентов (предметов)
 IngredientList = {}
 for i,v in pairs(workspace.active:GetDescendants()) do
 	if v.ClassName == "TextLabel" and v.Text == "Ingredient" then
@@ -3500,11 +3547,13 @@ for i,v in pairs(workspace.active:GetDescendants()) do
 	end
 end
 
+-- Проверка наличия предмета в рюкзаке
 _hasItem = function(name)
 	if Backpack:FindFirstChild(name) then return true end
 	if LocalPlayer.Character:FindFirstChild(name) then return true end
 end
 
+-- Поток для обновления списка ингредиентов
 Threads[#Threads+1] = task.spawn(function()
 	while wait(.75) do
 		table.clear(IngredientList)
